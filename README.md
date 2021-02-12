@@ -10,7 +10,9 @@ This web application is built in java + spring boot with maven + spring data jpa
 
 ## Usage
 
-```run the application
+```java
+
+run the application
 
 go to localhost:9009
 
@@ -34,4 +36,4 @@ read summary of the training session # user side
 
 ## Contributing
 
-The web application is still a work in progress; I started programming less than a year ago so bear with me. Pull requests are welcomed, but please open a discussion and I would be happy to receive thoughts, advices and any help I can get. 
+The web application is still a work in progress; I started programming less than a year ago so bear with me. Pull requests are welcomed, but please open a discussion and I would be happy to receive thoughts, advices and any help I can get.
