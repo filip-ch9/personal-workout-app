@@ -22,7 +22,7 @@ create training programs # coaches side
 
 manage training days # coaches side
 
-read reports and write reports # coaches side
+read reports & write reports # coaches side
 
 start a training session # user side
 
