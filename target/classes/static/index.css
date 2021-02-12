@@ -1,0 +1,95 @@
+/* .paragraph {
+    position: absolute;
+    margin-top: 20%;
+    margin-left: 0;
+    background: -webkit-linear-gradient(#eee, rgb(255, 0, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Arial Black";
+    font-size: 40px;
+} */
+
+.background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.99;
+}
+
+.logo {
+    background: black;
+    position: relative;
+    display: block;
+    float: left;
+    margin-left: 40px;
+    margin-top: 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+nav {
+    font-family: "Ariel Black";
+}
+
+ul {
+    background: black;
+    list-style: none;
+    margin-top: 0px;
+    margin-right: 20px;
+    padding-left: 0;
+}
+
+li {
+    color: #fff;
+    background: black;
+    display: block;
+    float: right;
+    padding: 1rem;
+    position: relative;
+    text-decoration: none;
+    transition-duration: 0.5s;
+}
+
+li a {
+    color: #fff;
+}
+li:hover,
+li:focus-within {
+    background: rgb(255, 61, 2);
+    cursor: pointer;
+}
+
+li:focus-within a {
+    outline: none;
+}
+
+ul li ul {
+    background: black;
+    visibility: hidden;
+    opacity: 0;
+    min-width: 1rem;
+    position: absolute;
+    transition: all 0.5s ease;
+    margin-top: 1rem;
+    left: 0;
+    display: none;
+}
+
+ul li:hover > ul,
+ul li:focus-within > ul,
+ul li ul:hover,
+ul li ul:focus {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+ul li ul li {
+  clear: both;
+  width: 100%;
+}

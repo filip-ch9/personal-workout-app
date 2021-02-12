@@ -1,0 +1,115 @@
+html,body {
+    width:100vw;
+    height: 100vh;
+    margin: 0;
+}
+#videoBG {
+    position:fixed;
+    z-index: -1;
+}
+@media (min-aspect-ratio: 16/9) {
+    #videoBG {
+        width:100%;
+        height: auto;
+    }
+}
+@media (max-aspect-ratio: 16/9) {
+    #videoBG { 
+        width:auto;
+        height: 100%;
+    }
+}
+@media (max-width: 767px) {
+    #videoBG {
+        display: none;
+    }
+    body {
+        background: url('poster.jpg');
+        background-size: cover;
+    }
+}
+.myHead {
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-family: "Arial Black";
+}
+
+input[type = text], 
+input[type = password], 
+input[type = number],
+input[type = email] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 18px 0;
+    border: #252c33;
+    background: #000000;
+    font-family: "Arial Black";
+}
+
+
+input[type = text]:focus, 
+input[type = password]:focus, 
+input[type = number]:focus,
+input[type = email]:focus,
+select:focus {
+    background-color: white;
+    outline: none;
+    color: rgb(255, 94, 0);
+}
+select {
+    width: 50%;
+    padding: 10px;
+    margin: 5px 0 18px 0;
+    border: #252c33;
+    background: #000000;
+    color: #7d7e80;
+    font-family: "Arial Black";
+}
+
+.btn {
+    background-color:  #ff0606;
+    color: white;
+    padding: 7px 2px;
+    border-style: initial;
+    cursor: pointer;
+    position: absolute;
+    font-family: "Arial Black";
+    left: 20px;
+    top: 660px;
+    width: 10%;
+    opacity: 0.9;  
+}
+.btn:hover {
+    opacity: 1;
+}
+div {
+    width: 550px;
+    border-radius: 5px;
+    padding: 20px;
+}
+.ml9 {
+    position: absolute;
+    font-weight: 200;
+    font-size: 3.8em;
+    margin-left: 700px;
+    margin-top: 100px ;
+  }
+  
+.ml9 .text-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-top: 0.2em;
+    padding-right: 2em;
+    padding-bottom: 0.1em;
+    overflow: hidden;
+  }
+  
+.ml9 .letter {
+    color: black;
+    font-weight: 1000;
+    transform-origin: 50% 100%;
+    display: inline-block;
+    line-height: 1em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
