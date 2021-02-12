@@ -10,7 +10,7 @@ This web application is built in java + spring boot with maven + spring data jpa
 
 ## Usage
 
-```java
+```python
 
 run the application
 
