@@ -10,7 +10,7 @@ Personal workout web application is java spring boot web application for user cr
 
 ## Usage
 
-```java
+```python
 
 run the application
 
