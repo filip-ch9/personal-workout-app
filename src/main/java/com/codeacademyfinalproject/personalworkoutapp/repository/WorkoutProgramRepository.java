@@ -10,7 +10,14 @@ import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutProgram;
 
 @Repository
 public interface WorkoutProgramRepository extends JpaRepository<WorkoutProgram, Long> {
-	
-	List<WorkoutProgram> findByGroup(Group group);
-	
+
+	public List<WorkoutProgram> findByGroup(Group group);
+
+	// complex query for nested entity graph
+	public List<WorkoutProgram> findByCoaches_Email(String email);
+
+	public List<WorkoutProgram> findByUsers_Email(String email);
+
+	public List<WorkoutProgram> findByWorkouts_Id(Long id);
+
 }
