@@ -1,0 +1,73 @@
+[33mcommit 5505a360d7da48088d0bd5653b0c369c062cf912[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Filip Churlevski <filip.churlevski@gmail.com>
+Date:   Sat Feb 13 10:30:45 2021 +0100
+
+    [initial commit]
+
+[33mcommit ec80e10678116741939265ed0dc62ca211a29952[m
+Merge: d8a1cba f0d3f51
+Author: Filip Churlevski <filip.churlevski@gmail.com>
+Date:   Fri Feb 12 22:45:51 2021 +0100
+
+    Merge https://github.com/filip-ch9/personal-workout-web-app
+    just learning
+
+[33mcommit d8a1cba1a3a970b9006cc3b645cf838e6542d87b[m
+Author: Filip Churlevski <filip.churlevski@gmail.com>
+Date:   Fri Feb 12 21:59:54 2021 +0100
+
+    initial commit
+
+[33mcommit f0d3f510449a7777a344f40be16073e2ccc53940[m
+Author: Filip Churlevski <76533999+filip-ch9@users.noreply.github.com>
+Date:   Fri Feb 12 15:36:04 2021 +0100
+
+    Delete README.md
+
+[33mcommit 897a43c65fbac7c04135c84a97aef6521b644572[m
+Author: Filip Churlevski <filip.churlevski@gmail.com>
+Date:   Fri Feb 12 15:09:05 2021 +0100
+
+    Added hamburger icon to the side bar open button
+
+[33mcommit e7db8e5f10eaa0dff6c83a4da635f6820e4a45da[m
+Author: Filip Churlevski <76533999+filip-ch9@users.noreply.github.com>
+Date:   Fri Feb 12 14:22:04 2021 +0100
+
+    Update README.md
+
+[33mcommit a1d128ef55a540afef23575d46322f79920b20e6[m
+Author: Filip Churlevski <76533999+filip-ch9@users.noreply.github.com>
+Date:   Fri Feb 12 14:21:45 2021 +0100
+
+    Update README.md
+
+[33mcommit 61994605a95b1a5b46d02ac69acc5b554f153911[m
+Author: Filip Churlevski <76533999+filip-ch9@users.noreply.github.com>
+Date:   Fri Feb 12 14:21:16 2021 +0100
+
+    Update README.md
+
+[33mcommit 980e38117d00e63c013a58fe54f7681cf3fff36c[m
+Author: Filip Churlevski <76533999+filip-ch9@users.noreply.github.com>
+Date:   Fri Feb 12 14:20:43 2021 +0100
+
+    Update README.md
+
+[33mcommit e6de5513c1bea498809612743494f082e8ca238a[m
+Author: Filip Churlevski <76533999+filip-ch9@users.noreply.github.com>
+Date:   Fri Feb 12 14:18:03 2021 +0100
+
+    Update README.md
+
+[33mcommit c094f2d9b0bc2d72dc46c3a644bf6a321cf2fa02[m
+Author: Filip Churlevski <filip.churlevski@gmail.com>
+Date:   Fri Feb 12 11:18:33 2021 +0100
+
+    Initial commit
+
+[33mcommit 3b8d76d8b68ce0a959f6411df8c73115c14985f8[m
+Author: Filip Churlevski <76533999+filip-ch9@users.noreply.github.com>
+Date:   Fri Feb 12 11:05:06 2021 +0100
+
+    Initial commit
