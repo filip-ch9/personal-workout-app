@@ -30,8 +30,9 @@ html,body {
 }
 .myHead {
     text-align: center;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 94, 0);
     font-family: "Arial Black";
+    font-weight: bolder;
 }
 
 input[type = text], 
@@ -42,7 +43,7 @@ input[type = email] {
     padding: 10px;
     margin: 5px 0 18px 0;
     border: #252c33;
-    background: #000000;
+    background: rgb(192, 192, 192);
     font-family: "Arial Black";
 }
 
@@ -61,7 +62,7 @@ select {
     padding: 10px;
     margin: 5px 0 18px 0;
     border: #252c33;
-    background: #000000;
+    background: rgb(192, 192, 192);
     color: #7d7e80;
     font-family: "Arial Black";
 }
