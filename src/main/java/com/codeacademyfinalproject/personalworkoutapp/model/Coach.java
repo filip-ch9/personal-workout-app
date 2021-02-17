@@ -36,6 +36,7 @@ public class Coach {
 	private String title;
 	private String accomplishments;
 	private String biography;
+	private String certificate;
 	
 	private String username;
 	private String password;
@@ -46,7 +47,7 @@ public class Coach {
 	private Group group;
 	
 	@OneToMany(mappedBy = "coach")
-	private List<User> users = new ArrayList<>();
+	private List<User> users = new ArrayList<User>();
 	
 	@ManyToMany(mappedBy = "coaches")
 	private List<WorkoutProgram> workoutPrograms = new ArrayList<WorkoutProgram>();
@@ -54,7 +55,7 @@ public class Coach {
 	public Coach() {}
 	
 	public Coach(Long version, String name, String surname, int age, String email, String country, String gender,
-			String title, String accomplishments, String biography, String username, String password,
+			String title, String accomplishments, String biography, String certificate, String username, String password,
 			String confirmPassword, Group group, List<User> users, List<WorkoutProgram> workoutPrograms) {
 		super();
 		this.version = version;
@@ -67,6 +68,7 @@ public class Coach {
 		this.title = title;
 		this.accomplishments = accomplishments;
 		this.biography = biography;
+		this.certificate = certificate;
 		this.username = username;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
@@ -231,21 +233,21 @@ public class Coach {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	
-	public List<WorkoutProgram> getWorkouts() {
-		return workoutPrograms;
-	}
 
-	public void setWorkouts(List<WorkoutProgram> workouts) {
-		this.workoutPrograms = workouts;
-	}
-	
-	public String getAchivements() {
+	public String getAccomplishments() {
 		return accomplishments;
 	}
 
-	public void setAchivements(String accomplishments) {
+	public void setAccomplishments(String accomplishments) {
 		this.accomplishments = accomplishments;
+	}
+
+	public List<WorkoutProgram> getWorkoutPrograms() {
+		return workoutPrograms;
+	}
+
+	public void setWorkoutPrograms(List<WorkoutProgram> workoutPrograms) {
+		this.workoutPrograms = workoutPrograms;
 	}
 
 	public String getBiography() {
@@ -256,15 +258,21 @@ public class Coach {
 		this.biography = biography;
 	}
 
+	public String getCertificate() {
+		return certificate;
+	}
+
+	public void setCertificate(String certificate) {
+		this.certificate = certificate;
+	}
+
 	@Override
 	public String toString() {
 		return "Coach [id=" + id + ", version=" + version + ", name=" + name + ", surname=" + surname + ", age=" + age
 				+ ", email=" + email + ", country=" + country + ", gender=" + gender + ", title=" + title
-				+ ", achivements=" + accomplishments + ", biography=" + biography + ", username=" + username + ", password="
-				+ password + ", confirmPassword=" + confirmPassword + ", group=" + group + ", users=" + users
-				+ ", workoutPrograms=" + workoutPrograms + "]";
+				+ ", accomplishments=" + accomplishments + ", biography=" + biography + ", certificate=" + certificate
+				+ ", username=" + username + ", password=" + password + ", confirmPassword=" + confirmPassword
+				+ ", group=" + group + ", users=" + users + ", workoutPrograms=" + workoutPrograms + "]";
 	}
-	
-	
 	
 }
