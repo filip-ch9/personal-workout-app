@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
 import com.codeacademyfinalproject.personalworkoutapp.model.TrainingDay;
 import com.codeacademyfinalproject.personalworkoutapp.model.User;
 import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutProgram;
@@ -25,6 +26,10 @@ public class WorkoutProgramService {
 		} else {
 			return new ArrayList<WorkoutProgram>();
 		}
+	}
+	
+	public List<WorkoutProgram> getUsersByCoach(Coach coach, List<User> users) {
+		return workoutProgramRepository.findByCoachesAndUsers(coach, users);
 	}
 
 	public List<WorkoutProgram> getByCoach(String email) {
