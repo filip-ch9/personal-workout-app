@@ -1,4 +1,6 @@
-/.classpath
+debug.log $ git rm --cached debug.log rm target $ git commit -m Start ignoring target
 /target/
+debu.log $ git rm --cached debug.log rm .project $ git commit -m Start ignoring .project
+.project/
+.classpath/
 /.settings/
-/.project/
