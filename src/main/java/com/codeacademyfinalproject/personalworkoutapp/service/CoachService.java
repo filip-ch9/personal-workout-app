@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
-import com.codeacademyfinalproject.personalworkoutapp.model.Group;
 import com.codeacademyfinalproject.personalworkoutapp.model.User;
 import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutProgram;
 import com.codeacademyfinalproject.personalworkoutapp.repository.CoachRepository;
@@ -28,21 +27,13 @@ public class CoachService {
 			return new ArrayList<Coach>();
 		}
 	}
-	
-	public List<Coach> getUsersByWorkoutProgram(List<User> users, List<WorkoutProgram> workouts) {
-		return coachRepository.findByUsersAndWorkoutPrograms(users, workouts);
-	}
-	
-	public List<Coach> getUsersByGroup(List<User> users, Group group) {
-		return coachRepository.findByUsersAndGroup(users, group);
-	}
-	
-	public List<Coach> getCoachesWorkoutPrograms(List<WorkoutProgram> workouts) {
-		return coachRepository.findByWorkoutPrograms(workouts);
-	}
-	
+
 	public List<Coach> getCoachesUsers(List<User> users) {
-		return coachRepository.findByUsers_Id(users);
+		return coachRepository.findByUsersIdIn(users);
+	}
+
+	public List<Coach> getCoachesWorkoutPrograms(List<WorkoutProgram> wPrograms) {
+		return coachRepository.findByWorkoutProgramsIdIn(wPrograms);
 	}
 
 	public List<Coach> getCoach(String email) {
