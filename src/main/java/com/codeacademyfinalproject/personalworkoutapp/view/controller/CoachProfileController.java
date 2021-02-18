@@ -16,18 +16,18 @@ public class CoachProfileController {
 	@Autowired
 	private CoachService coachService;
 	
-	@GetMapping("/coach-profile")
-	public String showProfilePage(ModelMap model) { 
-		if (model.getAttribute("email") == null) {
-			model.addAttribute("errorMessage", "You are not logged in");
-			return "redirect:/login";
-		} else {
-			Coach coach = (Coach)model.getAttribute("email");
-			model.put("workoutPrograms", coachService.getCoachesWorkoutPrograms(coach.getWorkoutPrograms()));
-			model.put("users", coachService.getCoachesUsers(coach.getUsers()));
-			return "coach-profile";
-		}
-		
-	}
+//	@GetMapping("/coach-profile")
+//	public String showProfilePage(ModelMap model) { 
+//		if (model.getAttribute("email") == null) {
+//			model.addAttribute("errorMessage", "You are not logged in");
+//			return "redirect:/login";
+//		} else {
+//			Coach coach = (Coach)model.getAttribute("email");
+//			model.put("workoutPrograms", coachService.getCoachesWorkoutPrograms(coach.getWorkoutPrograms()));
+//			model.put("users", coachService.getCoachesUsers(coach.getUsers()));
+//			return "coach-profile";
+//		}
+//		
+//	}
 	
 }

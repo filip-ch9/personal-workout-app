@@ -15,8 +15,5 @@ public interface CoachRepository extends JpaRepository<Coach, Long> {
 
 	public List<Coach> findByEmail(String email);
 	
-	public List<Coach> findByUsersIdIn(List<User> usersId);
-	
-	public List<Coach> findByWorkoutProgramsIdIn(List<WorkoutProgram> workoutProgramsId);
 	
 }

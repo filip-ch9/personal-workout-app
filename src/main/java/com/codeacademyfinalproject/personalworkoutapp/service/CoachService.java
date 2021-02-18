@@ -28,14 +28,6 @@ public class CoachService {
 		}
 	}
 
-	public List<Coach> getCoachesUsers(List<User> users) {
-		return coachRepository.findByUsersIdIn(users);
-	}
-
-	public List<Coach> getCoachesWorkoutPrograms(List<WorkoutProgram> wPrograms) {
-		return coachRepository.findByWorkoutProgramsIdIn(wPrograms);
-	}
-
 	public List<Coach> getCoach(String email) {
 		return coachRepository.findByEmail(email);
 	}

@@ -27,7 +27,6 @@ public class WorkoutProgramService {
 		}
 	}
 	
-
 	public List<WorkoutProgram> getByCoach(String email) {
 		return workoutProgramRepository.findByCoaches_Email(email);
 	}
