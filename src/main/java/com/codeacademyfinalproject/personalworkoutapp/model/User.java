@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -45,8 +46,8 @@ public class User {
 	@Column(name = "user_group")
 	private Group group;
 
-	@ManyToOne(optional = false, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "COACH_ID")
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinColumn(name = "user_id")
 	private Coach coach;
 
 	@ManyToMany(mappedBy = "users")
