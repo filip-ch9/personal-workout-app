@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
+import com.codeacademyfinalproject.personalworkoutapp.model.User;
 import com.codeacademyfinalproject.personalworkoutapp.service.CoachService;
 
 @Controller
-@SessionAttributes(names = { "username", "title", "biography" })
+@SessionAttributes(names = { "username", "title", "users", "biography" })
 public class CoachRegisterController {
 
 	@Autowired
@@ -31,10 +32,12 @@ public class CoachRegisterController {
 		List<Coach> isValidEmail = coachService.getCoach(email);
 		if (isValidEmail.isEmpty()) {
 			coach = coachService.saveCoach(coach);
+			User users = (User)model.getAttribute("id");
 			model.put("username", coach.getUsername());
 			model.put("title", coach.getTitle());
 			model.put("biography", coach.getBiography());
 			model.put("coach", coach);
+			model.put("users", coachService.getCoachesUsers(users.getId()));
 			return "redirect:/coach-profile";
 		} else {
 			model.put("errorMessage", "Email is already in use");

@@ -1,38 +1,56 @@
 package com.codeacademyfinalproject.personalworkoutapp.view.controller;
 
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
-import com.codeacademyfinalproject.personalworkoutapp.model.User;
+import com.codeacademyfinalproject.personalworkoutapp.model.TrainingDay;
 import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutProgram;
+import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutType;
 import com.codeacademyfinalproject.personalworkoutapp.service.CoachService;
+import com.codeacademyfinalproject.personalworkoutapp.service.WorkoutProgramService;
 
 @Controller
-@SessionAttributes(names = {"email", "users", "workoutPrograms"})
+@SessionAttributes(names = {"coach", "users", "workoutPrograms"})
 public class CoachProfileController {
 	
 	@Autowired
 	private CoachService coachService;
+	@Autowired
+	private WorkoutProgramService workoutProgramService;
 	
 	@GetMapping("/coach-profile")
-	public String showProfilePage(ModelMap model) { 
-		if (model.getAttribute("email") == null) {
-			model.addAttribute("errorMessage", "You are not logged in");
-			return "redirect:/login";
-		} else {
-			Coach coach = (Coach)model.getAttribute("email");
-			User user = (User)model.getAttribute("id");
-			WorkoutProgram wp = (WorkoutProgram)model.getAttribute("id");
-			model.put("email", coachService.getCoach(coach.getEmail()));
-			model.put("users", coachService.getCoachesUsers(user.getId()));
-			model.put("workoutPrograms", coachService.getCoachesWorkoutPrograms(wp.getId()));
-			return "coach-profile";
-		}
-		
+	public String showProfilePage(ModelMap model) {
+		return "coach-profile";
 	}
+	
+	
+	@GetMapping("/training")
+	public String showTrainingPage(ModelMap model) {
+			return "training";
+		}
+	
+	
+	@PostMapping("/create")
+	public String showCreateTrainingPage(ModelMap model) {
+		model.addAttribute("training",
+				new TrainingDay(0L, (String) model.get("nameOfExercise"), (String) model.get("duration"), new Date(),
+						(int) model.get("sets"), (int) model.get("reps"), (int) model.get("pause"),
+						(WorkoutType) model.get("type"), (byte[]) model.get("image")));
+		return "training";
+	}
+	
+	@GetMapping("/delete")
+	public String deleteTraining(@RequestBody WorkoutProgram wp) {
+		workoutProgramService.deleteWorkoutProgram(wp);
+		return "redirect:/training";
+	}
+	
 	
 }

@@ -15,6 +15,7 @@ import com.codeacademyfinalproject.personalworkoutapp.model.Group;
 import com.codeacademyfinalproject.personalworkoutapp.model.TrainingDay;
 import com.codeacademyfinalproject.personalworkoutapp.model.User;
 import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutProgram;
+import com.codeacademyfinalproject.personalworkoutapp.repository.CoachRepository;
 import com.codeacademyfinalproject.personalworkoutapp.repository.UserRepository;
 
 @SpringBootApplication
@@ -22,10 +23,12 @@ public class PersonalWorkoutAppApplication {
 	
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private CoachRepository coachRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PersonalWorkoutAppApplication.class, args);
-	
+		
 	}
 	
 	@PostConstruct
@@ -55,6 +58,7 @@ public class PersonalWorkoutAppApplication {
 			}
 			u1.setWorkouts(workouts);
 			userRepository.save(u1);
+			
 		}
 	}
 

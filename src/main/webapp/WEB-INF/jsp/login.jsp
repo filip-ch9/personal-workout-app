@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="css/login.css">
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
     <p>PERSONALIZED WORKOUT APP LOG IN</p>
     </div>
     <div class="loginContainer">
-        <font color="red">${errorMessage}</font>
+        <font color="red" th:text="${errorMessage}"></font>
         <form method="POST">
             <label for="email"></label>
             <input type="text" placeholder="Email" name="email" required>

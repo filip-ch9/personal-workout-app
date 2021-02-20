@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,16 +49,19 @@
 
     <div class="main">
       
-      <h3>${user}</h3>
+      <h3>Welcome ${username}</h3>
       <h1>Week of Feb 7th</h1>
       <p>2 training days - Power - Intensity 5/5</p>
       <div class="row">
         <div class="column">
       <table>
+      	<c:forEach items="${users}" var="user">
         <tr>
-          <th>Name of Exercise</th>
-          <th class="right">2 Movements - Alternating</th>
+          <th>${user.username}</th>
+          <th>${user.id}</th>
+          <th>${user.email}</th>
         </tr>
+        </c:forEach>
         <tr>
           <td>Sets - ${sets}</td>
           <td rowspan="3" style="text-align: center; vertical-align: middle;"><img src="gif/floorAbs.gif"></td>

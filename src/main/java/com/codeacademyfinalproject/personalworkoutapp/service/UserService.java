@@ -15,7 +15,9 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	
+	public List<User> getUsersWorkoutProgram(Long id) {
+		return userRepository.findByWorkouts_Id(id);
+	}
 	
 	public List<User> getUser(String email) {
 		return userRepository.findByEmail(email);
