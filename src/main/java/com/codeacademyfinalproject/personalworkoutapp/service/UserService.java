@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
 import com.codeacademyfinalproject.personalworkoutapp.model.User;
 import com.codeacademyfinalproject.personalworkoutapp.repository.UserRepository;
 
@@ -17,6 +18,10 @@ public class UserService {
 	
 	public List<User> getUsersWorkoutProgram(Long id) {
 		return userRepository.findByWorkouts_Id(id);
+	}
+	
+	public List<User> getByCoach(Coach coach) {
+		return userRepository.findByCoach(coach);
 	}
 	
 	public List<User> getUser(String email) {
@@ -31,10 +36,15 @@ public class UserService {
 	public List<User> isValidUser(String email, String password) {
 		return userRepository.findByEmailAndPassword(email, password);
 	}
-
+	
 	public User saveUser(User user) {
+		Optional<User> users = userRepository.findById(user.getId());
+		if (!users.isPresent()) {
 		userRepository.save(user);
 		return user;
+		} else {
+			throw new IllegalArgumentException();
+		}
 	}
 	
 	public User updateUser(User user) {

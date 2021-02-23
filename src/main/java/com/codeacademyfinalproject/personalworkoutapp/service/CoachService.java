@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
+import com.codeacademyfinalproject.personalworkoutapp.model.User;
 import com.codeacademyfinalproject.personalworkoutapp.repository.CoachRepository;
 
 @Service
@@ -30,8 +31,8 @@ public class CoachService {
 		return coachRepository.findByWorkoutPrograms_Id(id);
 	}
 	
-	public List<Coach> getCoachesUsers(Long id) {
-		return coachRepository.findByUsersIdNative(id);
+	public List<Coach> getCoachesUsers(Coach coach, User user) {
+		return coachRepository.findByUsersIdNative(coach.getId(), user.getId());
 	}
 
 	public List<Coach> getCoach(String email) {

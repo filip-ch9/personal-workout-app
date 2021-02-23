@@ -17,6 +17,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
@@ -31,8 +33,11 @@ public class TrainingDay {
 	private Long version;
 	
 	private String nameOfExercise;
-	private String duration;
+	private int duration;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dayOfTraining;
+	
 	private int sets;
 	private int reps;
 	private long pause;
@@ -56,7 +61,7 @@ public class TrainingDay {
 	
 	public TrainingDay() {}
 
-	public TrainingDay(Long version, String nameOfExercise, String duration, Date dayOfTraining, int sets, int reps, int pause,
+	public TrainingDay(Long version, String nameOfExercise, int duration, Date dayOfTraining, int sets, int reps, int pause,
 			WorkoutType type, byte[] image) {
 		super();
 		this.version = version;
@@ -86,15 +91,13 @@ public class TrainingDay {
 		this.version = version;
 	}
 
-	public String getDuration() {
+	public int getDuration() {
 		return duration;
 	}
 
-	public void setDuration(String duration) {
+	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-
-
 
 	public Date getDayOfTraining() {
 		return dayOfTraining;

@@ -3,11 +3,11 @@ package com.codeacademyfinalproject.personalworkoutapp.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +22,7 @@ import javax.persistence.Version;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Version
 	private Long version;
@@ -30,8 +30,6 @@ public class User {
 	private String name;
 	private String surname;
 	private int age;
-
-	@Column(name = "user_email", unique = true)
 	private String email;
 
 	private String country;
@@ -45,8 +43,8 @@ public class User {
 	@Column(name = "user_group")
 	private Group group;
 
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-	@JoinColumn(name = "user_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "COACH_ID")
 	private Coach coach;
 
 	@ManyToMany(mappedBy = "users")
@@ -203,5 +201,6 @@ public class User {
 				+ ", password=" + password + ", confirmPassword=" + confirmPassword + ", group=" + group + ", coach="
 				+ coach + ", workouts=" + workouts + "]";
 	}
+
 
 }

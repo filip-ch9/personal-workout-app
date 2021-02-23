@@ -2,6 +2,8 @@ package com.codeacademyfinalproject.personalworkoutapp.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -46,10 +48,10 @@ public class Coach {
 	@Column(name = "coach_group")
 	private Group group;
 	
-	@OneToMany(mappedBy = "coach")
+	@OneToMany(mappedBy = "coach", cascade = CascadeType.MERGE)
 	private List<User> users = new ArrayList<User>();
 	
-	@ManyToMany(mappedBy = "coaches")
+	@ManyToMany(mappedBy = "coaches", cascade = CascadeType.ALL)
 	private List<WorkoutProgram> workoutPrograms = new ArrayList<WorkoutProgram>();
 	
 	public Coach() {}

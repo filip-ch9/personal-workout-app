@@ -18,8 +18,12 @@ public interface CoachRepository extends JpaRepository<Coach, Long> {
 	/**
 	 * working with native queries
 	 */
-	@Query(value = "SELECT * FROM personal_workout_app_schema.application_user WHERE personal_workout_app_schema.application_user.a = :id", nativeQuery = true)
-	public List<Coach> findByUsersIdNative(@Param("id") Long id);
+	// TODO change query method
+	@Query(value = "SELECT   *\r\n"
+			+ "FROM        personal_workout_schema.coaches c\r\n"
+			+ "INNER JOIN  personal_workout_schema.application_user u\r\n"
+			+ "    ON      c.id = u.id ", nativeQuery = true)
+	public List<Coach> findByUsersIdNative(@Param("id") Long id1, @Param("id") Long id2);
 	
 	public List<Coach> findByWorkoutPrograms_Id(Long id);
 	

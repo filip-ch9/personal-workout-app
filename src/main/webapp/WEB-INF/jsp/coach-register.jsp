@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <link rel="stylesheet" href="css/register.css">
     <meta charset="UTF-8">
@@ -29,7 +29,7 @@
             	<label for="age"></label>
             	<input type="number" id="age" name="age" placeholder="Current age" required="required">
 
-            	<font color="red" th:text="${errorMessage}"></font>
+            	<font color="red">${errorMessage}</font>
             	<label for="email"></label>
             	<input type="email" id="email" name="email" placeholder="example@example.com" required="required">
 
