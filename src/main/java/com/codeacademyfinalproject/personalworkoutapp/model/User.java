@@ -43,7 +43,7 @@ public class User {
 	@Column(name = "user_group")
 	private Group group;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "COACH_ID")
 	private Coach coach;
 

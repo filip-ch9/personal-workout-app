@@ -19,7 +19,7 @@ public class PersonalWorkoutAppApplication {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired 
-	private CoachRepository coachrepository;
+	private CoachRepository coachRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PersonalWorkoutAppApplication.class, args);
@@ -38,11 +38,12 @@ public class PersonalWorkoutAppApplication {
 			coach.setBiography("World class Coach" + i);
 			coach.setCertificate("World School Of Coaches" + i);
 			coach.setGender("Male" + i);
-			coach.setTitle("Najak" + i);
+			coach.setTitle("Strongest" + i);
 			coach.setUsername("Batman" + i);
-			coach.setPassword("nekoj" + i);
-			coach.setConfirmPassword("nekoj" + i);
+			coach.setPassword("one" + i);
+			coach.setConfirmPassword("one" + i);
 			coach.setCountry("Macedonia" + i);
+			coachRepository.save(coach);
 			
 			List<User> users = new ArrayList<>();
 			for (int j = 0; j < 5; j++) {
@@ -56,13 +57,31 @@ public class PersonalWorkoutAppApplication {
 				user.setGender("Male"  + j);
 				user.setPassword("pero"  + j);
 				user.setConfirmPassword("pero"  + j);
+				user.setCoach(coach);
 				users.add(user);
 				userRepository.save(user);
+				coach.setUsers(users);
+//				System.out.println(coachRepository.findByUsersIdNative(user.getId(), coach.getId()));
 			}
 			
-			coach.setUsers(users);
-			coachrepository.save(coach);
+			
+			coachRepository.save(coach);
 		}
 	}
-
+//	@PostConstruct
+//	public void selectUsersAndCoaches() {
+//		Optional<Coach> optCoach = coachRepository.findById(1L);
+//		Optional<User> optUser = userRepository.findById(1L);
+//		System.out.println(optCoach);
+//		if (!optCoach.isPresent() && !optUser.isPresent()) {
+//			Coach coach = optCoach.get();
+//			User user = optUser.get();
+//			List<Coach> coach11 = coachRepository.findByUsersIdNative(user.getId(), coach.getId());
+//			coach11.stream().forEach(e -> System.out.println(e));
+//			List<User> user2 = userRepository.findByCoach_Id(coach.getId());
+//			user2.stream().forEach(e -> System.out.println(e));
+//		} else {
+//			System.out.println("no such user");
+//		}
+//	}
 }

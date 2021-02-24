@@ -35,7 +35,8 @@ public class CoachProfileController {
 	@GetMapping("/coach-profile")
 	public String showProfilePage(ModelMap model) {
 		Coach coach = (Coach)model.getAttribute("coach");
-		model.put("users", userService.getByCoach(coach));
+		User user = (User)model.getAttribute("user");
+//		model.put("users", coachService.getCoachesUsers(coach, user));
 		return "coach-profile";
 	}
 	
@@ -43,7 +44,6 @@ public class CoachProfileController {
 	public String showTrainingPage(ModelMap model) {
 			return "training";
 		}
-	
 	
 	@PostMapping("/create")
 	public String showCreateTrainingPage(ModelMap model) {
