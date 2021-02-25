@@ -32,12 +32,13 @@
 					</div>
 					
 				</div>
+				<h3>Create Training Day</h3>
 				<div class="controls"> 
                     <div class="form">
 						<div class="entry input-group">
 				<div class="row">
 					<div class="col-sm-12">
-						<h3>Create Training Day</h3>
+						
 						<div class="row">
 							<div class="col-xs-4 col-md-2">
 							    <label for="nameOfExercise">Name Of Exercise</label>
@@ -136,7 +137,6 @@
 				$(".img").click(function(){
 				    $("#div_img_name").text($(this).attr('src'));
 				    $('#myModal').modal('hide');
-				    return false;
 				});
 				$(function() {
     				$(document).on('click', '.btn-add', function(e)

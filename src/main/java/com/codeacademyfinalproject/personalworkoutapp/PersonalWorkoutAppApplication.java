@@ -46,7 +46,7 @@ public class PersonalWorkoutAppApplication {
 			coachRepository.save(coach);
 			
 			List<User> users = new ArrayList<>();
-			for (int j = 0; j < 5; j++) {
+			for (int j = 1; j < 5; j++) {
 				User user = new User();
 				user.setName("Pero"  + j);
 				user.setSurname("Peroson"  + j);
@@ -57,14 +57,11 @@ public class PersonalWorkoutAppApplication {
 				user.setGender("Male"  + j);
 				user.setPassword("pero"  + j);
 				user.setConfirmPassword("pero"  + j);
-				user.setCoach(coach);
-				users.add(user);
 				userRepository.save(user);
-				coach.setUsers(users);
-//				System.out.println(coachRepository.findByUsersIdNative(user.getId(), coach.getId()));
+				
 			}
 			
-			
+			coach.setUsers(users);
 			coachRepository.save(coach);
 		}
 	}

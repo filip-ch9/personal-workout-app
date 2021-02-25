@@ -170,9 +170,10 @@ public class WorkoutProgram {
 
 	@Override
 	public String toString() {
-		return "WorkoutProgram [id=" + id + ", version=" + version + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", workoutId=" + workoutId + ", group=" + group + ", coaches=" + coaches + ", users=" + users
-				+ ", workouts=" + workouts + "]";
+		return "WorkoutProgram [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", workoutId="
+				+ workoutId + "]";
 	}
+
+
 	
 }

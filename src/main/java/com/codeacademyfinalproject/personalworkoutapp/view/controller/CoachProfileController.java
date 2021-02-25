@@ -1,8 +1,6 @@
 package com.codeacademyfinalproject.personalworkoutapp.view.controller;
 
 import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,7 +34,8 @@ public class CoachProfileController {
 	public String showProfilePage(ModelMap model) {
 		Coach coach = (Coach)model.getAttribute("coach");
 		User user = (User)model.getAttribute("user");
-//		model.put("users", coachService.getCoachesUsers(coach, user));
+		model.addAttribute("users", userService.getAllUsers());
+		model.addAttribute("workoutPrograms", workoutProgramService.getAllWorkoutPrograms());
 		return "coach-profile";
 	}
 	

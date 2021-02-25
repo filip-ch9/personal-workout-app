@@ -31,8 +31,8 @@ public class CoachService {
 		return coachRepository.findByWorkoutPrograms_Id(id);
 	}
 	
-	public List<Coach> getCoachesUsers(Coach coach, User user) {
-		return coachRepository.findByUsersIdNative(coach.getId(), user.getId());
+	public List<Coach> getCoachesUsers(User user) {
+		return coachRepository.findByUsers_Id(user.getId());
 	}
 
 	public List<Coach> getCoach(String email) {

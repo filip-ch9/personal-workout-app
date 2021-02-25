@@ -1,5 +1,6 @@
 package com.codeacademyfinalproject.personalworkoutapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +20,11 @@ public class UserService {
 	public List<User> getUsersWorkoutProgram(Long id) {
 		return userRepository.findByWorkouts_Id(id);
 	}
-	
-	public List<User> getByCoach(Coach coach) {
-		return userRepository.findByCoach(coach);
+
+	public List<User> getUsersByCoach(Coach coach) {
+		List<User> users = new ArrayList<>();
+		userRepository.findByCoaches_Id(coach.getId()).forEach(users::add);
+		return users;
 	}
 	
 	public List<User> getUser(String email) {

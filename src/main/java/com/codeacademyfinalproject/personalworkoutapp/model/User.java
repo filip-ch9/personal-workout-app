@@ -7,13 +7,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -43,18 +42,21 @@ public class User {
 	@Column(name = "user_group")
 	private Group group;
 
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name = "COACH_ID")
-	private Coach coach;
+	@ManyToMany
+	@JoinTable (
+			name = "USER_COACH",
+			joinColumns = {@JoinColumn(name = "USER_ID")},
+			inverseJoinColumns = {@JoinColumn(name = "COACH_ID")}
+	)
+	private List<Coach> coaches = new ArrayList<>();
 
 	@ManyToMany(mappedBy = "users")
 	private List<WorkoutProgram> workouts = new ArrayList<>();
 
 	public User() {
 	}
-
 	public User(Long version, String name, String surname, int age, String email, String country, String gender,
-			String username, String password, String confirmPassword, Group group, Coach coach,
+			String username, String password, String confirmPassword, Group group, List<Coach> coach,
 			List<WorkoutProgram> workouts) {
 		super();
 		this.version = version;
@@ -68,8 +70,18 @@ public class User {
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 		this.group = group;
-		this.coach = coach;
+		this.coaches = coach;
 		this.workouts = workouts;
+	}
+	
+	public void addCoach(Coach coach) {
+		if (!coaches.contains(coach)) {
+			coaches.add(coach);
+		}
+	}
+	
+	public boolean removeCoach(Coach coach) {
+		return coaches.remove(coach);
 	}
 
 	public void addWorkoutProgram(WorkoutProgram wProgram) {
@@ -178,14 +190,12 @@ public class User {
 		this.group = group;
 	}
 
-	public Coach getCoach() {
-		return coach;
+	public List<Coach> getCoach() {
+		return coaches;
 	}
-
-	public void setCoach(Coach coach) {
-		this.coach = coach;
+	public void setCoach(List<Coach> coach) {
+		this.coaches = coach;
 	}
-
 	public List<WorkoutProgram> getWorkouts() {
 		return workouts;
 	}
@@ -193,14 +203,11 @@ public class User {
 	public void setWorkouts(List<WorkoutProgram> workouts) {
 		this.workouts = workouts;
 	}
-
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", version=" + version + ", name=" + name + ", surname=" + surname + ", age=" + age
-				+ ", email=" + email + ", country=" + country + ", gender=" + gender + ", username=" + username
-				+ ", password=" + password + ", confirmPassword=" + confirmPassword + ", group=" + group + ", coach="
-				+ coach + ", workouts=" + workouts + "]";
+		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + "]";
 	}
 
-
+	
+	
 }

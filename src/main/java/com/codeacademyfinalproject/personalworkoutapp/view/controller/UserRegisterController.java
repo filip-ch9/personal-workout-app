@@ -31,8 +31,8 @@ public class UserRegisterController {
 		List<User> isValidEmail = userService.getUser(email);
 		if (isValidEmail.isEmpty()) {
 			user = userService.saveUser(user);
-			model.put("username", user.getUsername());
-			model.put("user", user);
+			model.addAttribute("username", user.getUsername());
+			model.addAttribute("user", user);
 			return "redirect:/user-profile";
 		} else {
 			model.put("errorMessage", "Email is already in use");

@@ -32,7 +32,7 @@
             <font color="red">${errorMessage}</font>
             <label for="email"></label>
             <input type="email" id="email" name="email" placeholder="example@example.com" required="required">
-
+			
             <label for="country"></label>
             <select id="country" name="country">
                   <option value="argentina">Argentina</option>

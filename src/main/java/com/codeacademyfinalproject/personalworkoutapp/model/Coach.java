@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -49,7 +48,7 @@ public class Coach {
 	@Column(name = "coach_group")
 	private Group group;
 	
-	@OneToMany(mappedBy = "coach", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "coaches", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> users = new ArrayList<User>();
 	
 	@ManyToMany(mappedBy = "coaches", cascade = CascadeType.ALL)
@@ -268,14 +267,7 @@ public class Coach {
 	public void setCertificate(String certificate) {
 		this.certificate = certificate;
 	}
-
-	@Override
-	public String toString() {
-		return "Coach [id=" + id + ", version=" + version + ", name=" + name + ", surname=" + surname + ", age=" + age
-				+ ", email=" + email + ", country=" + country + ", gender=" + gender + ", title=" + title
-				+ ", accomplishments=" + accomplishments + ", biography=" + biography + ", certificate=" + certificate
-				+ ", username=" + username + ", password=" + password + ", confirmPassword=" + confirmPassword
-				+ ", group=" + group + ", users=" + users + ", workoutPrograms=" + workoutPrograms + "]";
-	}
+	
+	
 	
 }
