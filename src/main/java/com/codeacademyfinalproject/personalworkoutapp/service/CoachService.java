@@ -16,15 +16,16 @@ public class CoachService {
 
 	@Autowired
 	private CoachRepository coachRepository;
-
+	
+	
 	public List<Coach> getAllCoaches() {
-		List<Coach> coachesList = coachRepository.findAll();
-
-		if (coachesList.size() > 0) {
-			return coachesList;
-		} else {
-			return new ArrayList<Coach>();
-		}
+		List<Coach> coaches = new ArrayList<>();
+		coachRepository.findAll().forEach(coaches::add);
+		return coaches;
+	}
+	
+	public Coach getOneCoach(Long id) {
+		return coachRepository.getOne(id);
 	}
 	
 	public List<Coach> getCoachesWorkoutPrograms(Long id) {
@@ -69,5 +70,8 @@ public class CoachService {
 		coachRepository.delete(coach);
 		return coach;
 	}
-
+	
+	public void deleteCoachById(Long id) {
+		coachRepository.deleteById(id);
+	}
 }

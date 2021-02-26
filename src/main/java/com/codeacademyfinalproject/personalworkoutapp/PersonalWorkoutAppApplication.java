@@ -2,14 +2,18 @@ package com.codeacademyfinalproject.personalworkoutapp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.codeacademyfinalproject.personalworkoutapp.model.Admin;
 import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
 import com.codeacademyfinalproject.personalworkoutapp.model.User;
+import com.codeacademyfinalproject.personalworkoutapp.repository.AdminRepository;
 import com.codeacademyfinalproject.personalworkoutapp.repository.CoachRepository;
 import com.codeacademyfinalproject.personalworkoutapp.repository.UserRepository;
 
@@ -20,6 +24,8 @@ public class PersonalWorkoutAppApplication {
 	private UserRepository userRepository;
 	@Autowired 
 	private CoachRepository coachRepository;
+	@Autowired
+	private AdminRepository adminRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PersonalWorkoutAppApplication.class, args);
@@ -28,6 +34,17 @@ public class PersonalWorkoutAppApplication {
 	
 	@PostConstruct
 	public void createCoachesWithUsers() {
+		Admin a = new Admin();
+		a.setName("Admin");
+		a.setSurname("Adminson");
+		a.setAge(29);
+		a.setCountry("Macedonia");
+		a.setEmail("admin@admin.com");
+		a.setUsername("admin");
+		a.setPassword("admin");
+		a.setConfirmPassword("admin");
+		a.setGender("male");
+		adminRepository.save(a);
 		for (int i = 1; i < 10; i++) {
 			Coach coach = new Coach();
 			coach.setName("Filip" + i);
@@ -65,20 +82,20 @@ public class PersonalWorkoutAppApplication {
 			coachRepository.save(coach);
 		}
 	}
-//	@PostConstruct
-//	public void selectUsersAndCoaches() {
-//		Optional<Coach> optCoach = coachRepository.findById(1L);
-//		Optional<User> optUser = userRepository.findById(1L);
-//		System.out.println(optCoach);
-//		if (!optCoach.isPresent() && !optUser.isPresent()) {
-//			Coach coach = optCoach.get();
-//			User user = optUser.get();
-//			List<Coach> coach11 = coachRepository.findByUsersIdNative(user.getId(), coach.getId());
-//			coach11.stream().forEach(e -> System.out.println(e));
-//			List<User> user2 = userRepository.findByCoach_Id(coach.getId());
-//			user2.stream().forEach(e -> System.out.println(e));
-//		} else {
-//			System.out.println("no such user");
-//		}
-//	}
+	
+	@PostConstruct
+	public void selectCoachesWithUsers() {
+		Optional<Coach> optCoach = coachRepository.findById(1L);
+		System.out.println(optCoach);
+		if (!optCoach.isPresent()) {
+			Coach coach = optCoach.get();
+			List<User> users1 = userRepository.findByCoaches_Id(coach.getId());
+			users1.stream().forEach(e -> System.out.println(e));
+		} else if (!optCoach.isPresent()) {
+			
+			System.out.println("no such user");
+		} else {
+			System.out.println("error");
+		}
+	}
 }

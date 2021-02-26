@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.codeacademyfinalproject.personalworkoutapp.model.TrainingDay;
+import com.codeacademyfinalproject.personalworkoutapp.model.Admin;
 
 @Repository
-public interface TrainingDayRepository extends JpaRepository<TrainingDay, Long>{
+public interface AdminRepository extends JpaRepository<Admin, Long>{
 	
-	public List<TrainingDay> findByWorkoutPrograms_Id(Long id);
+	public List<Admin> findByEmailAndPassword(String email, String password);
+	
 	
 }

@@ -2,62 +2,100 @@
 <%@ include file="common/navbar.jspf"%>
 <%@ include file="common/header.jspf"%>
 
-
-<div class="container-fluid">
-	<div class="panel panel-default">
-			  <!-- Default panel contents -->
-			  <div class="panel-heading"><h2>My Users</h2></div>
-
-				<table class="table">
-				  <thead class="thead-dark">
-				    <tr>
-				      <th scope="col">Name</th>
-				      <th scope="col">Surname</th>
-				      <th scope="col">Email</th>
-				      <th scope="col">Program Name</th>
-				      <th scope="col">Start Date</th>
-				      <th scope="col">End Date</th>
-				      <th scope="col">Add/Remove</th>
-				      <th><!-- Single button -->
-							<div class="btn-group">
-							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							    Sort <span class="caret"></span>
-							  </button>
-							  <ul class="dropdown-menu">
-							    <li><a href="#">Most Active</a></li>
-							    <li><a href="#">Start Date</a></li>
-							    <li><a href="#">End Date</a></li>
-							    <li><a href="#">By Group</a></li>
-							  </ul>
-							</div>
-						</th>
-				    </tr>
-				  </thead>
-				  <tbody>
-					<c:forEach var="users" items="${user}">
-					<c:forEach var="workoutPrograms" items="${workoutProgram}">
-						<tr>
-							<td>${user.name}</td>
-							<td>${user.surname}</td>
-							<td>${user.email}</td>
-							<td>${workoutProgram.workoutId}</td>
-							<td>${workoutProgram.startDate}</td>
-							<td>${workoutProgram.endDate}</td>
-							<td><a type="button" class="btn btn-success"
-								href="/update-update?id=${user.id}">Update</a>
-							<a type="button" class="btn btn-warning"
-								href="/delete-user?id=${user.id}">Delete</a></td>
-						</tr>
-					</c:forEach>
-					</c:forEach>
-				</tbody>
-			</table>
+<link rel="stylesheet" href="/css/profile.css">
+<div class="container">
+<div class="row gutters">
+<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+<div class="card h-100">
+	<div class="card-body">
+		<div class="account-settings">
+			<div class="user-profile">
+				<div class="user-avatar">
+					<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+				</div>
+				<h5 class="user-name">Username: ${username}</h5>
+				<h6 class="user-email">Eamil: ${email}</h6>
+			</div>
+			<div class="about">
+				<h5>About</h5>
+				<p>${biography}</p>
+			</div>
 		</div>
 	</div>
-	<nav aria-label="...">
-  		<ul class="pager">
-    		<li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
-    		<li class="next"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
-  		</ul>
-	</nav>
+</div>
+</div>
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+<div class="card h-100">
+	<div class="card-body">
+		<div class="row gutters">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+				<h6 class="mb-2 text-primary">Personal Details</h6>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" class="form-control" id="email" name="email" placeholder="Enter email ID">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="surname">Surname</label>
+					<input type="text" class="form-control" id="surname" name="surname" placeholder="Enter Surname">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="website">Website URL</label>
+					<input type="url" class="form-control" id="website" placeholder="Website url">
+				</div>
+			</div>
+		</div>
+		<div class="row gutters">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="title">Title</label>
+					<input type="text" class="form-control" id="title" name="title" placeholder="Enter Title">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" id="password" name="password" placeholder="Enter new password">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="confirmPassword">Confirm Password</label>
+					<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm new password">
+				</div>
+			</div>
+		</div>
+		<div class="row gutters">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+				<div class="text-right">
+					<button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
+					<button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+
 <%@ include file="common/footer.jspf"%>

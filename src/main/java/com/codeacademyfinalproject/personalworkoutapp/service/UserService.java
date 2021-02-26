@@ -27,6 +27,10 @@ public class UserService {
 		return users;
 	}
 	
+	public User getOneUser(Long id) {
+		return userRepository.getOne(id);
+	}
+	
 	public List<User> getUser(String email) {
 		return userRepository.findByEmail(email);
 	}
@@ -69,5 +73,9 @@ public class UserService {
 	public User deleteUser(User user) {
 		userRepository.delete(user);
 		return user;
+	}
+	
+	public void deleteUserById(Long id) {
+		userRepository.deleteById(id);
 	}
 }

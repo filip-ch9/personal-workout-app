@@ -58,7 +58,7 @@ public class WorkoutProgram {
 	)
 	private List<User> users = new ArrayList<User>();
 	
-	@ManyToMany(mappedBy = "wPrograms")
+	@ManyToMany(mappedBy = "workoutPrograms")
 	private List<TrainingDay> workouts = new ArrayList<>();
 	
 	public WorkoutProgram() {}

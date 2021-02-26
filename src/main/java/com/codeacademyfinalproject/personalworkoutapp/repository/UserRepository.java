@@ -17,4 +17,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public List<User> findByWorkouts_Id(Long id);
 	
 	public List<User> findByCoaches_Id(Long id);
+	
 }

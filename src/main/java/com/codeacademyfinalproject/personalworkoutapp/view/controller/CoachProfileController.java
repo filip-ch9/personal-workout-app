@@ -38,7 +38,14 @@ public class CoachProfileController {
 		model.addAttribute("workoutPrograms", workoutProgramService.getAllWorkoutPrograms());
 		return "coach-profile";
 	}
-	
+	@GetMapping("/dashboard")
+	public String showDashboard() {
+		return "/dashboard";
+	}
+	@GetMapping("/analytics")
+	public String showAnalytics() {
+		return "/analytics";
+	}
 	@GetMapping("/training")
 	public String showTrainingPage(ModelMap model) {
 			return "training";

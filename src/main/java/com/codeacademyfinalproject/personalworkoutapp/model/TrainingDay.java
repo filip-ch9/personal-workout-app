@@ -40,7 +40,7 @@ public class TrainingDay {
 	
 	private int sets;
 	private int reps;
-	private long pause;
+	private int pause;
 	
 	@NotNull(message = "Type of workout is required.")
 	@Enumerated(EnumType.STRING)
@@ -53,7 +53,7 @@ public class TrainingDay {
 			joinColumns = {@JoinColumn(name = "TRAINING_DAY_ID")},
 			inverseJoinColumns = {@JoinColumn(name = "WORKOUT_PROGRAM_ID")}
 	)
-	private List<WorkoutProgram> wPrograms = new ArrayList<>();
+	private List<WorkoutProgram> workoutPrograms = new ArrayList<>();
 	
 	@Lob
 	@Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
@@ -123,14 +123,6 @@ public class TrainingDay {
 		this.reps = reps;
 	}
 
-	public long getPause() {
-		return pause;
-	}
-
-	public void setPause(int pause) {
-		this.pause = pause;
-	}
-
 	public WorkoutType getType() {
 		return type;
 	}
@@ -140,16 +132,19 @@ public class TrainingDay {
 	}
 
 	public List<WorkoutProgram> getwPrograms() {
-		return wPrograms;
+		return workoutPrograms;
 	}
 
 	public void setwPrograms(List<WorkoutProgram> wPrograms) {
-		this.wPrograms = wPrograms;
+		this.workoutPrograms = wPrograms;
 	}
 	
 
-	public void setPause(long pause) {
+	public void setPause(int pause) {
 		this.pause = pause;
+	}
+	public int getPause() {
+		return pause;
 	}
 	
 	public byte[] getImage() {
@@ -172,7 +167,7 @@ public class TrainingDay {
 	public String toString() {
 		return "TrainingDay [id=" + id + ", version=" + version + ", nameOfExercise=" + nameOfExercise + ", duration="
 				+ duration + ", dayOfTraining=" + dayOfTraining + ", sets=" + sets + ", reps=" + reps + ", pause="
-				+ pause + ", type=" + type + ", wPrograms=" + wPrograms + ", image=" + Arrays.toString(image) + "]";
+				+ pause + ", type=" + type + ", wPrograms=" + workoutPrograms + ", image=" + Arrays.toString(image) + "]";
 	}
 
 
