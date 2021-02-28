@@ -1,9 +1,8 @@
 package com.codeacademyfinalproject.personalworkoutapp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +11,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.codeacademyfinalproject.personalworkoutapp.model.Admin;
 import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
+import com.codeacademyfinalproject.personalworkoutapp.model.Group;
+import com.codeacademyfinalproject.personalworkoutapp.model.TrainingDay;
 import com.codeacademyfinalproject.personalworkoutapp.model.User;
+import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutProgram;
+import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutType;
 import com.codeacademyfinalproject.personalworkoutapp.repository.AdminRepository;
 import com.codeacademyfinalproject.personalworkoutapp.repository.CoachRepository;
 import com.codeacademyfinalproject.personalworkoutapp.repository.UserRepository;
+import com.codeacademyfinalproject.personalworkoutapp.repository.WorkoutProgramRepository;
 
 @SpringBootApplication
 public class PersonalWorkoutAppApplication {
@@ -26,6 +30,8 @@ public class PersonalWorkoutAppApplication {
 	private CoachRepository coachRepository;
 	@Autowired
 	private AdminRepository adminRepository;
+	@Autowired
+	private WorkoutProgramRepository workoutProgramRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PersonalWorkoutAppApplication.class, args);
@@ -45,6 +51,7 @@ public class PersonalWorkoutAppApplication {
 		a.setConfirmPassword("admin");
 		a.setGender("male");
 		adminRepository.save(a);
+		
 		for (int i = 1; i < 10; i++) {
 			Coach coach = new Coach();
 			coach.setName("Filip" + i);
@@ -77,25 +84,40 @@ public class PersonalWorkoutAppApplication {
 				userRepository.save(user);
 				
 			}
-			
 			coach.setUsers(users);
 			coachRepository.save(coach);
 		}
+		
+		
 	}
 	
 	@PostConstruct
-	public void selectCoachesWithUsers() {
-		Optional<Coach> optCoach = coachRepository.findById(1L);
-		System.out.println(optCoach);
-		if (!optCoach.isPresent()) {
-			Coach coach = optCoach.get();
-			List<User> users1 = userRepository.findByCoaches_Id(coach.getId());
-			users1.stream().forEach(e -> System.out.println(e));
-		} else if (!optCoach.isPresent()) {
+	public void createCoachesWithWorkoutPrograms() {
+		for (int j = 1; j < 10; j++) {
+			WorkoutProgram workoutProgram = new WorkoutProgram();
+			workoutProgram.setStartDate(new Date());
+			workoutProgram.setEndDate(new Date());
+			workoutProgram.setWorkoutId("My Program" + j);
+			workoutProgram.setGroup(Group.SPORTS_TEAMS);
+			workoutProgram.addTrainingDay(new TrainingDay());
+			workoutProgramRepository.save(workoutProgram);
 			
-			System.out.println("no such user");
-		} else {
-			System.out.println("error");
+			List<TrainingDay> trainings = new ArrayList<>();
+			for (int i = 0; i < 6; i++) {
+				TrainingDay training = new TrainingDay();
+				training.setDayOfTraining(new Date());
+				training.setDuration(50 + i);
+				training.setNameOfExercise("Exercise" + i);
+				training.setPause(30 + i);
+				training.setReps(5 + i);
+				training.setSets(2 + i);
+				training.setType(WorkoutType.EXPLOSIVENESS);
+			}
+			workoutProgram.setWorkouts(trainings);
+			workoutProgramRepository.save(workoutProgram);
+			
 		}
+		
 	}
+
 }

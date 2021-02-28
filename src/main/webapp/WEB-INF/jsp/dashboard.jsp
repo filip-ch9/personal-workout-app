@@ -1,4 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="common/navbar.jspf"%>
 <%@ include file="common/header.jspf"%>
 
@@ -34,8 +33,8 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-					<c:forEach var="users" items="${user}">
-					<c:forEach var="workoutPrograms" items="${workoutProgram}">
+					<c:forEach var="user" items="${coach.users}">
+					<c:forEach var="workoutProgram" items="${coach.workoutPrograms}">
 						<tr>
 							<td>${user.name}</td>
 							<td>${user.surname}</td>

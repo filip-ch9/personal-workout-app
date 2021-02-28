@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
 import com.codeacademyfinalproject.personalworkoutapp.model.User;
 
 @Repository
@@ -16,6 +17,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	public List<User> findByWorkouts_Id(Long id);
 	
-	public List<User> findByCoaches_Id(Long id);
-	
+	public List<User> findByCoachesIn(List<Coach> coaches);
+	 
 }

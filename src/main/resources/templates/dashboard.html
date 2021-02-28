@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+	
+<body>
+	<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Personal Workout App</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+                <li><a href="/training"><span class="glyphicon glyphicon-bullhorn"></span> Training</a></li>
+                <li><a href="/nutrition"><span class="glyphicon glyphicon-leaf"></span> Nutrition</a></li>
+                <li><a href="/analytics"><span class="glyphicon glyphicon-stats"></span> Analytics</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/contact"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
+                <li><a href="/coach-profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li><a href="/login"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container-fluid">
+	<div class="panel panel-default">
+	<div th:switch="${users}" class="container my-5">
+            <p class="my-5">
+                <a href="/edit" class="btn btn-info">
+                <i class="fas fa-user-plus ml-2"> Add User </i></a>
+            </p>
+            <div class="col-md-10">
+                <h2 th:case="null">No record found !!</h2>
+                <div th:case="*">
+			  <!-- Default panel contents -->
+			  <div class="panel-heading"><h2>My Users</h2></div>
+				<table class="table">
+				  <thead class="thead-dark">
+				    <tr>
+				      <th scope="col">Name</th>
+				      <th scope="col">Surname</th>
+				      <th scope="col">Email</th>
+				      <th scope="col">Program Name</th>
+				      <th scope="col">Start Date</th>
+				      <th scope="col">End Date</th>
+				      <th scope="col">Add/Remove</th>
+				      <th><!-- Single button -->
+							<div class="btn-group">
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							    Sort <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu">
+							    <li><a href="#">Most Active</a></li>
+							    <li><a href="#">Start Date</a></li>
+							    <li><a href="#">End Date</a></li>
+							    <li><a href="#">By Group</a></li>
+							  </ul>
+							</div>
+						</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+						<tr th:each="user : ${users}">
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.surname}"></td>
+							<td th:text="${user.email}"></td>
+							<td th:text="${workoutProgram.workoutId}"></td>
+							<td th:text="${workoutProgram.startDate}"></td>
+							<td th:text="${workoutProgram.endDate}"></td>
+							<td><a type="button" class="btn btn-success"
+								href="/update-update?id=${user.id}">Update</a>
+							<a type="button" class="btn btn-warning"
+								href="/delete-user?id=${user.id}">Delete</a></td>
+						</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<nav aria-label="...">
+  		<ul class="pager">
+    		<li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+    		<li class="next"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+  		</ul>
+	</nav>
+    
+    
+</body>
+
+</html>

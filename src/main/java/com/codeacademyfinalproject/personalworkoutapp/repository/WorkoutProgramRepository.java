@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
 import com.codeacademyfinalproject.personalworkoutapp.model.Group;
 import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutProgram;
 
@@ -13,8 +14,7 @@ public interface WorkoutProgramRepository extends JpaRepository<WorkoutProgram, 
 
 	public List<WorkoutProgram> findByGroup(Group group);
 		
-	// complex query for nested entity graph
-	public List<WorkoutProgram> findByCoaches_Email(String email);
+	public List<WorkoutProgram> findByCoachesIn(List<Coach> coaches);
 
 	public List<WorkoutProgram> findByUsers_Email(String email);
 

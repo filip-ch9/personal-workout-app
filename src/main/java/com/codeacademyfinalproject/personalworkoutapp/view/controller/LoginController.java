@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.codeacademyfinalproject.personalworkoutapp.model.Admin;
 import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
 import com.codeacademyfinalproject.personalworkoutapp.model.User;
+import com.codeacademyfinalproject.personalworkoutapp.service.AdminService;
 import com.codeacademyfinalproject.personalworkoutapp.service.CoachService;
 import com.codeacademyfinalproject.personalworkoutapp.service.UserService;
 
@@ -23,6 +25,8 @@ public class LoginController {
 	private CoachService coachService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private AdminService adminService;
 
 	@GetMapping("/login")
 	public String showLoginPage(ModelMap model) {
@@ -31,7 +35,7 @@ public class LoginController {
 	
 	@PostMapping("/login")
 	public String showProfilePage(ModelMap model, @RequestParam String email, @RequestParam String password) {
-
+		List<Admin> isValidAdmin = adminService.isValidAdmin(email, password);
 		List<Coach> isValidCoach = coachService.isValidCoach(email, password);
 		List<User> isValidUser = userService.isValidUser(email, password);
 		if (!isValidCoach.isEmpty()) {
@@ -42,6 +46,10 @@ public class LoginController {
 			model.put("email", email);
 			model.put("password", password);
 			return "redirect:/user-profile";
+		} else if (!isValidAdmin.isEmpty()) {
+			model.put("email", email);
+			model.put("password", password);
+			return "redirect:/admin";
 		} else {
 			model.put("errorMessage", "Invalid Credentials");
 			return "login";

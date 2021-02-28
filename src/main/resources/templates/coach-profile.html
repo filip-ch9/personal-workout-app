@@ -1,7 +1,37 @@
-<%@ include file="common/navbar.jspf"%>
-<%@ include file="common/header.jspf"%>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<link rel="stylesheet" href="/css/profile.css">
+<head>
+    <title>Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+	
+<body>
+	<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Personal Workout App</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+                <li><a href="/training"><span class="glyphicon glyphicon-bullhorn"></span> Training</a></li>
+                <li><a href="/nutrition"><span class="glyphicon glyphicon-leaf"></span> Nutrition</a></li>
+                <li><a href="/analytics"><span class="glyphicon glyphicon-stats"></span> Analytics</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/contact"><span class="glyphicon glyphicon-question-sign"></span> Help</a></li>
+                <li><a href="/coach-profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li><a href="/login"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    
 <div class="container">
 <div class="row gutters">
 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
@@ -12,12 +42,12 @@
 				<div class="user-avatar">
 					<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
 				</div>
-				<h5 class="user-name">Username: ${username}</h5>
-				<h6 class="user-email">Emil: ${email}</h6>
+				<h5 class="user-name" th:text="${username}"></h5>
+				<h6 class="user-email" th:email="${email}"></h6>
 			</div>
 			<div class="about">
 				<h5>About</h5>
-				<p>${biography}</p>
+				<p th:text="${biography}"></p>
 			</div>
 		</div>
 	</div>
@@ -96,5 +126,5 @@
 </div>
 </div>
 </div>
-
-<%@ include file="common/footer.jspf"%>
+  </body>
+</html>

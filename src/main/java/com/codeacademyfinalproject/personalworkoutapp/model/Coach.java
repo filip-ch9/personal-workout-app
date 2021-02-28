@@ -267,6 +267,15 @@ public class Coach {
 	public void setCertificate(String certificate) {
 		this.certificate = certificate;
 	}
+
+	@Override
+	public String toString() {
+		return "Coach [id=" + id + ", version=" + version + ", name=" + name + ", surname=" + surname + ", age=" + age
+				+ ", email=" + email + ", country=" + country + ", gender=" + gender + ", title=" + title
+				+ ", accomplishments=" + accomplishments + ", biography=" + biography + ", certificate=" + certificate
+				+ ", username=" + username + ", password=" + password + ", confirmPassword=" + confirmPassword
+				+ ", group=" + group + ", users=" + users + ", workoutPrograms=" + workoutPrograms + "]";
+	}
 	
 	
 	

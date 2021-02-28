@@ -24,8 +24,15 @@ public class CoachService {
 		return coaches;
 	}
 	
-	public Coach getOneCoach(Long id) {
-		return coachRepository.getOne(id);
+	public Coach getCoachById(Long id) {
+		Optional<Coach> coach = coachRepository.findById(id);
+		
+		if(coach.isPresent()) {
+			return coach.get();
+		} else {
+			return coach.get();
+		}
+		
 	}
 	
 	public List<Coach> getCoachesWorkoutPrograms(Long id) {
@@ -72,6 +79,9 @@ public class CoachService {
 	}
 	
 	public void deleteCoachById(Long id) {
-		coachRepository.deleteById(id);
+		Optional<Coach> coach = coachRepository.findById(id);
+		if (coach.isPresent()) {
+			coachRepository.deleteById(id);
+		} 
 	}
 }

@@ -1,8 +1,11 @@
 package com.codeacademyfinalproject.personalworkoutapp.view.controller;
 
 import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +22,7 @@ import com.codeacademyfinalproject.personalworkoutapp.service.UserService;
 import com.codeacademyfinalproject.personalworkoutapp.service.WorkoutProgramService;
 
 @Controller
-@SessionAttributes(names = {"username", "coach", "users", "workoutPrograms"})
+@SessionAttributes(names = {"username", "coach", "email", "biography", "users", "workoutPrograms"})
 public class CoachProfileController {
 	
 	@Autowired
@@ -31,15 +34,18 @@ public class CoachProfileController {
 	
 	
 	@GetMapping("/coach-profile")
-	public String showProfilePage(ModelMap model) {
+	public String showProfilePage(Model model) {
 		Coach coach = (Coach)model.getAttribute("coach");
-		User user = (User)model.getAttribute("user");
-		model.addAttribute("users", userService.getAllUsers());
-		model.addAttribute("workoutPrograms", workoutProgramService.getAllWorkoutPrograms());
+		model.addAttribute("coach", coach);
 		return "coach-profile";
 	}
 	@GetMapping("/dashboard")
-	public String showDashboard() {
+	public String showDashboard(Model model) {
+		List<Coach> coach = coachService.getAllCoaches();
+		List<User> userList = userService.getUsersByCoach(coach);
+		List<WorkoutProgram> workoutList = workoutProgramService.getByCoach(coach);
+		model.addAttribute("users", userList);
+		model.addAttribute("workoutPrograms", workoutList);
 		return "/dashboard";
 	}
 	@GetMapping("/analytics")

@@ -24,17 +24,17 @@ public class UserProfileController {
 	
 	@GetMapping("/user-profile")
 	public String showProfilePage(ModelMap model) {
-		if (model.getAttribute("user") == null) {
-			model.put("errorMessage", "You are not logged in!");
-			return "redirect:/login";
-		} else {
-			User user = (User)model.getAttribute("user");
-			WorkoutProgram wp = (WorkoutProgram)model.getAttribute("id");
-			model.put("user", userService.getUser(user.getEmail()));
-			model.put("workouts", userService.getUsersWorkoutProgram(wp.getId()));
+//		if (model.getAttribute("user") == null) {
+//			model.put("errorMessage", "You are not logged in!");
+//			return "redirect:/login";
+//		} else {
+//			User user = (User)model.getAttribute("user");
+//			WorkoutProgram wp = (WorkoutProgram)model.getAttribute("id");
+//			model.put("user", userService.getUser(user.getEmail()));
+//			model.put("workouts", userService.getUsersWorkoutProgram(wp.getId()));
 			return "user-profile";
 		}
-	}
+	
 	
 	@GetMapping("/start-training")
 	public String showTrainingPage(ModelMap model) {

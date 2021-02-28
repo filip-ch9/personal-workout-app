@@ -86,6 +86,16 @@ public class WorkoutProgram {
 		return workouts.remove(workout);
 	}
 	
+	public void addCoach(Coach coach) {
+		if (!coaches.contains(coach)) {
+			coaches.add(coach);
+		}
+	}
+	
+	public boolean removeCoach(Coach coach) {
+		return coaches.remove(coach);
+	}
+	
 	public void addUser(User user) {
 		if (!users.contains(user)) {
 			users.add(user);
