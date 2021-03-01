@@ -67,7 +67,6 @@ public class PersonalWorkoutAppApplication {
 			coach.setPassword("one" + i);
 			coach.setConfirmPassword("one" + i);
 			coach.setCountry("Macedonia" + i);
-			coachRepository.save(coach);
 			
 			List<User> users = new ArrayList<>();
 			for (int j = 1; j < 5; j++) {
@@ -82,8 +81,8 @@ public class PersonalWorkoutAppApplication {
 				user.setPassword("pero"  + j);
 				user.setConfirmPassword("pero"  + j);
 				userRepository.save(user);
-				
 			}
+			
 			coach.setUsers(users);
 			coachRepository.save(coach);
 		}
@@ -92,15 +91,14 @@ public class PersonalWorkoutAppApplication {
 	}
 	
 	@PostConstruct
-	public void createCoachesWithWorkoutPrograms() {
+	public void createWorkoutProgramsWithTrainingDays() {
 		for (int j = 1; j < 10; j++) {
 			WorkoutProgram workoutProgram = new WorkoutProgram();
 			workoutProgram.setStartDate(new Date());
 			workoutProgram.setEndDate(new Date());
-			workoutProgram.setWorkoutId("My Program" + j);
+			workoutProgram.setNameOfWorkoutProgram("My Program" + j);
 			workoutProgram.setGroup(Group.SPORTS_TEAMS);
 			workoutProgram.addTrainingDay(new TrainingDay());
-			workoutProgramRepository.save(workoutProgram);
 			
 			List<TrainingDay> trainings = new ArrayList<>();
 			for (int i = 0; i < 6; i++) {

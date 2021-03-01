@@ -28,6 +28,17 @@ public class UserService {
 		return userRepository.getOne(id);
 	}
 	
+	public User getUserById(Long id) {
+		Optional<User> user = userRepository.findById(id);
+		
+		if(user.isPresent()) {
+			return user.get();
+		} else {
+			return user.get();
+		}
+		
+	}
+	
 	public List<User> getUser(String email) {
 		return userRepository.findByEmail(email);
 	}

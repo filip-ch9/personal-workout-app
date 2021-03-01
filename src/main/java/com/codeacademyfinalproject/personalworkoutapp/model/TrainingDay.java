@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -47,7 +48,10 @@ public class TrainingDay {
 	@Column(name = "workout_type", nullable = false)
 	private WorkoutType type;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {
+		    CascadeType.PERSIST,
+		    CascadeType.MERGE
+		})
 	@JoinTable(
 			name = "TRAINING_DAY_WORKOUT_PROGRAM",
 			joinColumns = {@JoinColumn(name = "TRAINING_DAY_ID")},

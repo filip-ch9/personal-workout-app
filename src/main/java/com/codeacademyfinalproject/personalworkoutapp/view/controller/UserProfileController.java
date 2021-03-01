@@ -36,12 +36,12 @@ public class UserProfileController {
 		}
 	
 	
-	@GetMapping("/start-training")
+	@GetMapping("/user-training")
 	public String showTrainingPage(ModelMap model) {
-		User user = (User) model.getAttribute("user");
-		List<WorkoutProgram> workouts = workoutProgramService.getByUser(user.getEmail());
-		model.addAttribute("workouts", workouts);
-		return "training";
+//		User user = (User) model.getAttribute("user");
+//		List<WorkoutProgram> workouts = workoutProgramService.getByUser(user.getEmail());
+//		model.addAttribute("workouts", workouts);
+		return "user-training";
 	}
 	
 }

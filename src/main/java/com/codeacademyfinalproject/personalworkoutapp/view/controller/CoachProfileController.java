@@ -42,8 +42,8 @@ public class CoachProfileController {
 	@GetMapping("/dashboard")
 	public String showDashboard(Model model) {
 		List<Coach> coach = coachService.getAllCoaches();
-		List<User> userList = userService.getUsersByCoach(coach);
-		List<WorkoutProgram> workoutList = workoutProgramService.getByCoach(coach);
+		List<User> userList = userService.getAllUsers();
+		List<WorkoutProgram> workoutList = workoutProgramService.getAllWorkoutPrograms();
 		model.addAttribute("users", userList);
 		model.addAttribute("workoutPrograms", workoutList);
 		return "/dashboard";

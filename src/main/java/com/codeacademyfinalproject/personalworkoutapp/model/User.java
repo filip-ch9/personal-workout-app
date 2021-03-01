@@ -2,7 +2,7 @@ package com.codeacademyfinalproject.personalworkoutapp.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -42,7 +42,10 @@ public class User {
 	@Column(name = "user_group")
 	private Group group;
 
-	@ManyToMany
+	@ManyToMany(cascade = {
+		    CascadeType.PERSIST,
+		    CascadeType.MERGE
+		})
 	@JoinTable (
 			name = "USER_COACH",
 			joinColumns = {@JoinColumn(name = "USER_ID")},
@@ -189,17 +192,17 @@ public class User {
 	public void setGroup(Group group) {
 		this.group = group;
 	}
+	
 
-	public List<Coach> getCoach() {
+	public List<Coach> getCoaches() {
 		return coaches;
 	}
-	public void setCoach(List<Coach> coach) {
-		this.coaches = coach;
+	public void setCoaches(List<Coach> coaches) {
+		this.coaches = coaches;
 	}
 	public List<WorkoutProgram> getWorkouts() {
 		return workouts;
 	}
-
 	public void setWorkouts(List<WorkoutProgram> workouts) {
 		this.workouts = workouts;
 	}
@@ -210,6 +213,5 @@ public class User {
 				+ ", password=" + password + ", confirmPassword=" + confirmPassword + ", group=" + group + ", coaches="
 				+ coaches + ", workouts=" + workouts + "]";
 	}
-
 	
 }

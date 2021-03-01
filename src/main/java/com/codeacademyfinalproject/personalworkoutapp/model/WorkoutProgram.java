@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -35,14 +36,17 @@ public class WorkoutProgram {
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
 	
-	@Column(name = "WORKOUT_PROGRAM_ID", unique = true)
-	private String workoutId;
+
+	private String nameOfWorkoutProgram;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "workout_program_group")
 	private Group group;
 	
-	@ManyToMany
+	@ManyToMany(cascade = {
+		    CascadeType.PERSIST,
+		    CascadeType.MERGE
+		})
 	@JoinTable(
 			name = "WORKOUT_PROGRAM_COACH",
 			joinColumns = {@JoinColumn(name = "WORKOUT_PROGRAM_ID")},
@@ -50,7 +54,10 @@ public class WorkoutProgram {
 	)
 	private List<Coach> coaches = new ArrayList<>();
 	
-	@ManyToMany
+	@ManyToMany(cascade = {
+		    CascadeType.PERSIST,
+		    CascadeType.MERGE
+		})
 	@JoinTable(
 			name = "WORKOUT_PROGRAM_USER",
 			joinColumns = {@JoinColumn(name = "WORKOUT_PROGRAM_ID")},
@@ -69,7 +76,7 @@ public class WorkoutProgram {
 		this.version = version;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.workoutId = workoutId;
+		this.nameOfWorkoutProgram = workoutId;
 		this.group = group;
 		this.coaches = coaches;
 		this.users = users;
@@ -138,12 +145,12 @@ public class WorkoutProgram {
 		this.endDate = endDate;
 	}
 
-	public String getWorkoutId() {
-		return workoutId;
+	public String getNameOfWorkoutProgram() {
+		return nameOfWorkoutProgram;
 	}
 
-	public void setWorkoutId(String workoutId) {
-		this.workoutId = workoutId;
+	public void setNameOfWorkoutProgram(String nameOfWorkoutProgram) {
+		this.nameOfWorkoutProgram = nameOfWorkoutProgram;
 	}
 
 	public Group getGroup() {
@@ -181,7 +188,7 @@ public class WorkoutProgram {
 	@Override
 	public String toString() {
 		return "WorkoutProgram [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", workoutId="
-				+ workoutId + "]";
+				+ nameOfWorkoutProgram + "]";
 	}
 
 

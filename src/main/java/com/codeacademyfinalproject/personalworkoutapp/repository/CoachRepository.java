@@ -23,5 +23,4 @@ public interface CoachRepository extends JpaRepository<Coach, Long> {
 	public List<Coach> findByWorkoutPrograms_Id(Long id);
 	
 	public List<Coach> findByUsers_Id(Long id);
-	
 }

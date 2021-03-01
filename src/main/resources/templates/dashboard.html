@@ -37,6 +37,11 @@
                 <a href="/edit" class="btn btn-info">
                 <i class="fas fa-user-plus ml-2"> Add User </i></a>
             </p>
+            <div th:switch="${workoutPrograms}" class="container my-5">
+            <p class="my-5">
+                <a href="/edit" class="btn btn-info">
+                <i class="fas fa-user-plus ml-2"> Add Workout Program </i></a>
+            </p>
             <div class="col-md-10">
                 <h2 th:case="null">No record found !!</h2>
                 <div th:case="*">
@@ -72,17 +77,19 @@
 							<td th:text="${user.name}"></td>
 							<td th:text="${user.surname}"></td>
 							<td th:text="${user.email}"></td>
-							<td th:text="${workoutProgram.workoutId}"></td>
-							<td th:text="${workoutProgram.startDate}"></td>
-							<td th:text="${workoutProgram.endDate}"></td>
+							<td th:text="${user.workouts}"></td>
+							<td th:text="${user.workouts}"></td>
+							<td th:text="${user.workouts}"></td>
 							<td><a type="button" class="btn btn-success"
 								href="/update-update?id=${user.id}">Update</a>
 							<a type="button" class="btn btn-warning"
 								href="/delete-user?id=${user.id}">Delete</a></td>
-						</tr>
+
+							</tr>
 				</tbody>
 			</table>
 		</div>
+	</div>
 	</div>
 	</div>
 	</div>

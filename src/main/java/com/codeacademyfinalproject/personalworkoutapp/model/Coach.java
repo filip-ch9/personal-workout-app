@@ -2,19 +2,18 @@ package com.codeacademyfinalproject.personalworkoutapp.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name = "COACHES")
@@ -30,6 +29,7 @@ public class Coach {
 	private String surname;
 	private int age;
 	
+	@NaturalId
 	@Column(name = "coach_email", unique = true)
 	private String email;
 	
@@ -48,11 +48,11 @@ public class Coach {
 	@Column(name = "coach_group")
 	private Group group;
 	
-	@ManyToMany(mappedBy = "coaches", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "coaches")
 	private List<User> users = new ArrayList<User>();
 	
-	@ManyToMany(mappedBy = "coaches", cascade = CascadeType.ALL)
-	private List<WorkoutProgram> workoutPrograms = new ArrayList<WorkoutProgram>();
+	@ManyToMany(mappedBy = "coaches")
+	private List<WorkoutProgram> workoutPrograms = new ArrayList<>();
 	
 	public Coach() {}
 	
@@ -227,14 +227,6 @@ public class Coach {
 		this.group = group;
 	}
 
-	public List<User> getUsers() {
-		return users;
-	}
-
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
 
 	public String getAccomplishments() {
 		return accomplishments;
@@ -242,14 +234,6 @@ public class Coach {
 
 	public void setAccomplishments(String accomplishments) {
 		this.accomplishments = accomplishments;
-	}
-
-	public List<WorkoutProgram> getWorkoutPrograms() {
-		return workoutPrograms;
-	}
-
-	public void setWorkoutPrograms(List<WorkoutProgram> workoutPrograms) {
-		this.workoutPrograms = workoutPrograms;
 	}
 
 	public String getBiography() {
@@ -268,6 +252,22 @@ public class Coach {
 		this.certificate = certificate;
 	}
 
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public List<WorkoutProgram> getWorkoutPrograms() {
+		return workoutPrograms;
+	}
+
+	public void setWorkoutPrograms(List<WorkoutProgram> workoutPrograms) {
+		this.workoutPrograms = workoutPrograms;
+	}
+
 	@Override
 	public String toString() {
 		return "Coach [id=" + id + ", version=" + version + ", name=" + name + ", surname=" + surname + ", age=" + age
@@ -276,7 +276,5 @@ public class Coach {
 				+ ", username=" + username + ", password=" + password + ", confirmPassword=" + confirmPassword
 				+ ", group=" + group + ", users=" + users + ", workoutPrograms=" + workoutPrograms + "]";
 	}
-	
-	
-	
+
 }
