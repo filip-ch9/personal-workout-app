@@ -81,9 +81,9 @@
 							<td th:text="${user.workouts}"></td>
 							<td th:text="${user.workouts}"></td>
 							<td><a type="button" class="btn btn-success"
-								href="/update-update?id=${user.id}">Update</a>
+								th:href="@{/update/{id}(id=${user.id})}">Update</a>
 							<a type="button" class="btn btn-warning"
-								href="/delete-user?id=${user.id}">Delete</a></td>
+								href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
 
 							</tr>
 				</tbody>

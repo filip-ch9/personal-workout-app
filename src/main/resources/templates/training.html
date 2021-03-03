@@ -35,6 +35,8 @@
 					<div class="col-sm-12">
 						<h3>Create Workout Plan</h3>
 						<div class="row">
+						<form action="#" th:action="@{/create}" th:object="${workoutProgram}"
+                                                                       method="post">
 							<div class="col-xs-4 col-md-2">
 							    <label for="workoutId">Name</label>
 							    <input type="text" class="form-control" id="workoutId" name="workoutId"></div>
@@ -55,11 +57,26 @@
 							    	<option value="Corporate Wellness">Corporate Wellness</option>
 							    	<option value="Other">Other</option>
 			    				</select>
+			    				<div class="row">
+			<div class="col-xs-4 col-md-2"><br>
+			<span class="input-group-btn">
+						
+							<button class="btn btn-success" type="submit">Create
+								<span class="glyphicon glyphicon-succes"></span>
+							</button>
+							</span>
+							</div>
+							</div>
 				    		</div>
+				    		
+				    		</form>
 						</div>
+						
 					</div>
 					
 				</div>
+				<form action="#" th:action="@{/create}" th:object="${trainingDay}"
+                                                                       method="post">
 				<h3>Create Training Day</h3>
 				<div class="controls"> 
                     <div class="form">
@@ -68,6 +85,7 @@
 					<div class="col-sm-12">
 						
 						<div class="row">
+						
 							<div class="col-xs-4 col-md-2">
 							    <label for="nameOfExercise">Name Of Exercise</label>
 							    <input type="text" class="form-control" id="nameOfExercise" name="nameOfExercise"></div>
@@ -139,11 +157,15 @@
 				    	<input type="file" id="image" name="image">                             
 			      		
 			      </div>
+			   
 			    </div>
 			  </div>
+			  
 			</div>	
+			
 						</div>
 					</div>
+					
 			</div>
 			</div>
 			<div class="row">
@@ -156,10 +178,23 @@
 							</span>
 							</div>
 							</div>
+							
 			</div>
 			</div>
 			</div>
+			<div class="row">
+			<div class="col-xs-4 col-md-2"><br>
+			<span class="input-group-btn">
+						
+							<button class="btn btn-success" type="submit">Create
+								<span class="glyphicon glyphicon-succes"></span>
+							</button>
+							</span>
+							</div>
+							</div>
+			</form>
 			</div>
+			
     		</body>
     		<script>
     		$(".img").click(function(){
