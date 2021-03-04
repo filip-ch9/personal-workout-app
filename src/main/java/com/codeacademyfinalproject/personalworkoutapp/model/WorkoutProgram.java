@@ -3,7 +3,6 @@ package com.codeacademyfinalproject.personalworkoutapp.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,7 +25,7 @@ public class WorkoutProgram {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long id;
+	private Long id;
 	
 	@Version
 	private Long version;
@@ -43,81 +42,78 @@ public class WorkoutProgram {
 	@Column(name = "workout_program_group")
 	private Group group;
 	
-	@ManyToMany(cascade = {
-		    CascadeType.PERSIST,
-		    CascadeType.MERGE
-		})
-	@JoinTable(
-			name = "WORKOUT_PROGRAM_COACH",
-			joinColumns = {@JoinColumn(name = "WORKOUT_PROGRAM_ID")},
-			inverseJoinColumns = {@JoinColumn(name = "COACH_ID")}
-	)
-	private List<Coach> coaches = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "coach_id", referencedColumnName = "id")
+	private Coach coach;
 	
-	@ManyToMany(cascade = {
-		    CascadeType.PERSIST,
-		    CascadeType.MERGE
-		})
-	@JoinTable(
-			name = "WORKOUT_PROGRAM_USER",
-			joinColumns = {@JoinColumn(name = "WORKOUT_PROGRAM_ID")},
-			inverseJoinColumns = {@JoinColumn(name = "USER_ID")}
-	)
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "workoutProgram")
 	private List<User> users = new ArrayList<User>();
 	
-	@ManyToMany(mappedBy = "workoutPrograms")
-	private List<TrainingDay> workouts = new ArrayList<>();
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "workoutProgram")
+	private List<TrainingDay> workouts = new ArrayList<TrainingDay>();
 	
 	public WorkoutProgram() {}
 
 	public WorkoutProgram(Long version, Date startDate, Date endDate, String workoutId, Group group,
-			List<Coach> coaches, List<User> users, List<TrainingDay> workouts) {
+			Coach coach, List<User> users, List<TrainingDay> workouts) {
 		super();
 		this.version = version;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.nameOfWorkoutProgram = workoutId;
 		this.group = group;
-		this.coaches = coaches;
+		this.coach = coach;
 		this.users = users;
 		this.workouts = workouts;
 	}
 	
-	public void addTrainingDay(TrainingDay workout) {
-		if (!workouts.contains(workout)) {
-			workouts.add(workout);
+	public void addTrainingDay(TrainingDay training) {
+		addTrainingDay(training, true);
+	}
+	
+	void addTrainingDay(TrainingDay training, boolean set) {
+		if(training != null) {
+			if(getWorkouts().contains(training)) {
+				getWorkouts().set(getWorkouts().indexOf(training), training);
+			} else {
+				getWorkouts().add(training);
+			} if (set) {
+				training.setWorkoutProgram(this, false);
+			}
 		}
 	}
 	
-	public boolean removeTrainingDay(TrainingDay workout) {
-		return workouts.remove(workout);
-	}
-	
-	public void addCoach(Coach coach) {
-		if (!coaches.contains(coach)) {
-			coaches.add(coach);
-		}
-	}
-	
-	public boolean removeCoach(Coach coach) {
-		return coaches.remove(coach);
+	public void removeTrainingDay(TrainingDay training) {
+		getWorkouts().remove(training);
+		training.setWorkoutProgram(null);
 	}
 	
 	public void addUser(User user) {
-		if (!users.contains(user)) {
-			users.add(user);
+		addUser(user, true);
+	}
+	
+	void addUser(User user, boolean set) {
+		if (user != null) {
+			if(getUsers().contains(user)) {
+				getUsers().set(getUsers().indexOf(user), user);
+			} else {
+				getUsers().add(user);
+			} if (set) {
+				user.setWorkoutProgram(this, false);
+			}
 		}
 	}
 	
-	public boolean removeUser(User user) {
-		return users.remove(user);
+	public void removeUser(User user) {
+		getUsers().remove(user);
+		user.setWorkoutProgram(null);
 	}
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -161,12 +157,19 @@ public class WorkoutProgram {
 		this.group = group;
 	}
 
-	public List<Coach> getCoaches() {
-		return coaches;
+	public Coach getCoach() {
+		return coach;
 	}
 
-	public void setCoaches(List<Coach> coaches) {
-		this.coaches = coaches;
+	public void setCoach(Coach coach) {
+		setCoach(coach, true);
+	}
+	
+	void setCoach(Coach coach, boolean add) {
+		this.coach = coach;
+		if (coach != null && add) {
+			coach.addWorkoutProgram(this, false);
+		}
 	}
 
 	public List<User> getUsers() {
@@ -191,6 +194,18 @@ public class WorkoutProgram {
 				+ nameOfWorkoutProgram + "]";
 	}
 
-
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof WorkoutProgram))
+            return false;
+ 
+        final WorkoutProgram wp = (WorkoutProgram)object;
+ 
+        if (id != null && wp.getId() != null) {
+            return id.equals(wp.getId());
+        }
+        return false;
+    }
 	
 }

@@ -33,22 +33,14 @@
     <div class="container-fluid">
 	<div class="panel panel-default">
 	<div th:switch="${users}" class="container my-5">
-            <p class="my-5">
-                <a href="/edit" class="btn btn-info">
-                <i class="fas fa-user-plus ml-2"> Add User </i></a>
-            </p>
             <div th:switch="${workoutPrograms}" class="container my-5">
-            <p class="my-5">
-                <a href="/edit" class="btn btn-info">
-                <i class="fas fa-user-plus ml-2"> Add Workout Program </i></a>
-            </p>
             <div class="col-md-10">
                 <h2 th:case="null">No record found !!</h2>
                 <div th:case="*">
 			  <!-- Default panel contents -->
 			  <div class="panel-heading"><h2>My Users</h2></div>
 				<table class="table">
-				  <thead class="thead-dark">
+				  <thead>
 				    <tr>
 				      <th scope="col">Name</th>
 				      <th scope="col">Surname</th>
@@ -77,9 +69,9 @@
 							<td th:text="${user.name}"></td>
 							<td th:text="${user.surname}"></td>
 							<td th:text="${user.email}"></td>
-							<td th:text="${user.workouts}"></td>
-							<td th:text="${user.workouts}"></td>
-							<td th:text="${user.workouts}"></td>
+							<td th:text="${user.workoutProgram}"></td>
+							<td th:text="${user.workoutProgram}"></td>
+							<td th:text="${user.workoutProgram}"></td>
 							<td><a type="button" class="btn btn-success"
 								th:href="@{/update/{id}(id=${user.id})}">Update</a>
 							<a type="button" class="btn btn-warning"

@@ -18,7 +18,7 @@ import com.codeacademyfinalproject.personalworkoutapp.service.CoachService;
 import com.codeacademyfinalproject.personalworkoutapp.service.UserService;
 
 @Controller
-@SessionAttributes(names = {"username", "coach", "user", "workoutPrograms", "workouts"})
+@SessionAttributes(names = {"username", "coach", "biography", "email", "user", "workoutPrograms", "workoutProgram", "workouts"})
 public class LoginController {
 
 	@Autowired

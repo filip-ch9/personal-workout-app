@@ -14,10 +14,8 @@ public interface WorkoutProgramRepository extends JpaRepository<WorkoutProgram, 
 
 	public List<WorkoutProgram> findByGroup(Group group);
 		
-	public List<WorkoutProgram> findByCoachesIn(List<Coach> coaches);
+	public List<WorkoutProgram> findByCoach(Coach coach);
 
-	public List<WorkoutProgram> findByUsers_Email(String email);
 
-	public List<WorkoutProgram> findByWorkouts_Id(Long id);
 
 }

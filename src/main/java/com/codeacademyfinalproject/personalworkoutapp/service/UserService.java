@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
 import com.codeacademyfinalproject.personalworkoutapp.model.User;
+import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutProgram;
 import com.codeacademyfinalproject.personalworkoutapp.repository.UserRepository;
 
 @Service
@@ -16,12 +17,12 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<User> getUsersWorkoutProgram(Long id) {
-		return userRepository.findByWorkouts_Id(id);
+	public List<User> getUsersByWorkoutProgram(WorkoutProgram wp) {
+		return userRepository.findByWorkoutProgram(wp);
 	}
 
-	public List<User> getUsersByCoach(List<Coach> coach) {
-		return userRepository.findByCoachesIn(coach);
+	public List<User> getUsersByCoach(Coach coach) {
+		return userRepository.findByCoach(coach);
 	}
 	
 	public User getOneUser(Long id) {

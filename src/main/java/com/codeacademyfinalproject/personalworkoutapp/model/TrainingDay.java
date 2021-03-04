@@ -1,11 +1,8 @@
 package com.codeacademyfinalproject.personalworkoutapp.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,9 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,7 +25,7 @@ public class TrainingDay {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long id;
+	private Long id;
 	@Version
 	private Long version;
 	
@@ -48,16 +44,9 @@ public class TrainingDay {
 	@Column(name = "workout_type", nullable = false)
 	private WorkoutType type;
 	
-	@ManyToMany(cascade = {
-		    CascadeType.PERSIST,
-		    CascadeType.MERGE
-		})
-	@JoinTable(
-			name = "TRAINING_DAY_WORKOUT_PROGRAM",
-			joinColumns = {@JoinColumn(name = "TRAINING_DAY_ID")},
-			inverseJoinColumns = {@JoinColumn(name = "WORKOUT_PROGRAM_ID")}
-	)
-	private List<WorkoutProgram> workoutPrograms = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "workoutProgram", referencedColumnName = "id")
+	private WorkoutProgram workoutProgram;
 	
 	@Lob
 	@Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
@@ -65,8 +54,9 @@ public class TrainingDay {
 	
 	public TrainingDay() {}
 
-	public TrainingDay(Long version, String nameOfExercise, int duration, Date dayOfTraining, int sets, int reps, int pause,
-			WorkoutType type, byte[] image) {
+	public TrainingDay(Long version, String nameOfExercise, int duration, Date dayOfTraining, int sets, int reps,
+			int pause, @NotNull(message = "Type of workout is required.") WorkoutType type,
+			WorkoutProgram workoutProgram, byte[] image) {
 		super();
 		this.version = version;
 		this.nameOfExercise = nameOfExercise;
@@ -76,14 +66,17 @@ public class TrainingDay {
 		this.reps = reps;
 		this.pause = pause;
 		this.type = type;
+		this.workoutProgram = workoutProgram;
 		this.image = image;
 	}
 
-	public long getId() {
+
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -135,14 +128,22 @@ public class TrainingDay {
 		this.type = type;
 	}
 
-	public List<WorkoutProgram> getwPrograms() {
-		return workoutPrograms;
+	
+
+	public WorkoutProgram getWorkoutProgram() {
+		return workoutProgram;
 	}
 
-	public void setwPrograms(List<WorkoutProgram> wPrograms) {
-		this.workoutPrograms = wPrograms;
+	public void setWorkoutProgram(WorkoutProgram workoutProgram) {
+		setWorkoutProgram(workoutProgram, true);
 	}
 	
+	void setWorkoutProgram(WorkoutProgram workoutProgram, boolean add) {
+		this.workoutProgram = workoutProgram;
+		if (workoutProgram != null && add) {
+			workoutProgram.addTrainingDay(this, false);
+		}
+	}
 
 	public void setPause(int pause) {
 		this.pause = pause;
@@ -171,9 +172,21 @@ public class TrainingDay {
 	public String toString() {
 		return "TrainingDay [id=" + id + ", version=" + version + ", nameOfExercise=" + nameOfExercise + ", duration="
 				+ duration + ", dayOfTraining=" + dayOfTraining + ", sets=" + sets + ", reps=" + reps + ", pause="
-				+ pause + ", type=" + type + ", wPrograms=" + workoutPrograms + ", image=" + Arrays.toString(image) + "]";
+				+ pause + ", type=" + type + ", workoutProgram=" + workoutProgram + ", image=" + Arrays.toString(image) + "]";
 	}
 
-
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof TrainingDay))
+            return false;
+ 
+        final TrainingDay training = (TrainingDay)object;
+ 
+        if (id != null && training.getId() != null) {
+            return id.equals(training.getId());
+        }
+        return false;
+    }
 
 }

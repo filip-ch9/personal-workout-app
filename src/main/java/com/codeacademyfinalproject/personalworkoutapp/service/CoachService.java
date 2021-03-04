@@ -34,14 +34,6 @@ public class CoachService {
 		
 	}
 	
-	public List<Coach> getCoachesWorkoutPrograms(Long id) {
-		return coachRepository.findByWorkoutPrograms_Id(id);
-	}
-	
-	public List<Coach> getUsersByCoach(Optional<Long> id) {
-		return coachRepository.findByUsersId(id);
-	}
-	
 	public List<Coach> getCoach(String email) {
 		return coachRepository.findByEmail(email);
 	}

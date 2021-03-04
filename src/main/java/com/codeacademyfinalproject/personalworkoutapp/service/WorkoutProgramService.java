@@ -28,13 +28,10 @@ public class WorkoutProgramService {
 		}
 	}
 	
-	public List<WorkoutProgram> getByCoach(List<Coach> coaches) {
-		return workoutProgramRepository.findByCoachesIn(coaches);
+	public List<WorkoutProgram> getByCoach(Coach coach) {
+		return workoutProgramRepository.findByCoach(coach);
 	}
 
-	public List<WorkoutProgram> getByUser(String email) {
-		return workoutProgramRepository.findByUsers_Email(email);
-	}
 	
 	public WorkoutProgram updateWorkoutProgram(WorkoutProgram wp, User user, TrainingDay tDay) {
 		Optional<WorkoutProgram> workouts = workoutProgramRepository.findById(wp.getId());

@@ -1,8 +1,5 @@
 package com.codeacademyfinalproject.personalworkoutapp.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,8 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -22,7 +18,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	@Version
 	private Long version;
 
@@ -42,25 +38,19 @@ public class User {
 	@Column(name = "user_group")
 	private Group group;
 
-	@ManyToMany(cascade = {
-		    CascadeType.PERSIST,
-		    CascadeType.MERGE
-		})
-	@JoinTable (
-			name = "USER_COACH",
-			joinColumns = {@JoinColumn(name = "USER_ID")},
-			inverseJoinColumns = {@JoinColumn(name = "COACH_ID")}
-	)
-	private List<Coach> coaches = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "coach_id", referencedColumnName = "id")
+	private Coach coach;
+	
+	@ManyToOne
+	@JoinColumn(name = "workoutProgram_id", referencedColumnName = "id")
+	private WorkoutProgram workoutProgram;
 
-	@ManyToMany(mappedBy = "users")
-	private List<WorkoutProgram> workouts = new ArrayList<>();
+	public User() {	}
 
-	public User() {
-	}
 	public User(Long version, String name, String surname, int age, String email, String country, String gender,
-			String username, String password, String confirmPassword, Group group, List<Coach> coach,
-			List<WorkoutProgram> workouts) {
+			String username, String password, String confirmPassword, Group group, Coach coach,
+			WorkoutProgram workoutProgram) {
 		super();
 		this.version = version;
 		this.name = name;
@@ -73,35 +63,16 @@ public class User {
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 		this.group = group;
-		this.coaches = coach;
-		this.workouts = workouts;
-	}
-	
-	public void addCoach(Coach coach) {
-		if (!coaches.contains(coach)) {
-			coaches.add(coach);
-		}
-	}
-	
-	public boolean removeCoach(Coach coach) {
-		return coaches.remove(coach);
+		this.coach = coach;
+		this.workoutProgram = workoutProgram;
 	}
 
-	public void addWorkoutProgram(WorkoutProgram wProgram) {
-		if (!workouts.contains(wProgram)) {
-			workouts.add(wProgram);
-		}
-	}
 
-	public boolean removeWorkoutProgram(WorkoutProgram wPrgoram) {
-		return workouts.remove(wPrgoram);
-	}
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -192,26 +163,56 @@ public class User {
 	public void setGroup(Group group) {
 		this.group = group;
 	}
-	
 
-	public List<Coach> getCoaches() {
-		return coaches;
+	public Coach getCoach() {
+		return coach;
 	}
-	public void setCoaches(List<Coach> coaches) {
-		this.coaches = coaches;
+	public void setCoach(Coach coach) {
+		setCoach(coach, true);
 	}
-	public List<WorkoutProgram> getWorkouts() {
-		return workouts;
+	
+	void setCoach(Coach coach, boolean add) {
+		this.coach = coach;
+		if (coach != null && add) {
+			coach.addUser(this, false);
+		}
 	}
-	public void setWorkouts(List<WorkoutProgram> workouts) {
-		this.workouts = workouts;
+	
+	public WorkoutProgram getWorkoutProgram() {
+		return workoutProgram;
 	}
+
+	public void setWorkoutProgram(WorkoutProgram workoutProgram) {
+		setWorkoutProgram(workoutProgram, true);
+	}
+	
+	void setWorkoutProgram(WorkoutProgram wp, boolean add) {
+		this.workoutProgram = wp;
+		if(wp != null && add) {
+			wp.addUser(this, false);
+		}
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", version=" + version + ", name=" + name + ", surname=" + surname + ", age=" + age
 				+ ", email=" + email + ", country=" + country + ", gender=" + gender + ", username=" + username
-				+ ", password=" + password + ", confirmPassword=" + confirmPassword + ", group=" + group + ", coaches="
-				+ coaches + ", workouts=" + workouts + "]";
+				+ ", password=" + password + ", confirmPassword=" + confirmPassword + ", group=" + group + ", coach="
+				+ coach + ", workoutProgram=" + workoutProgram + "]";
 	}
+
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof User))
+            return false;
+ 
+        final User user = (User)object;
+ 
+        if (id != null && user.getId() != null) {
+            return id.equals(user.getId());
+        }
+        return false;
+    }
 	
 }

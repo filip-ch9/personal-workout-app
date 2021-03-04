@@ -2,6 +2,7 @@ package com.codeacademyfinalproject.personalworkoutapp.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,7 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -21,7 +22,7 @@ public class Coach {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long id;
+	private Long id;
 	@Version
 	private Long version;
 	
@@ -48,11 +49,11 @@ public class Coach {
 	@Column(name = "coach_group")
 	private Group group;
 	
-	@ManyToMany(mappedBy = "coaches")
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "coach")
 	private List<User> users = new ArrayList<User>();
 	
-	@ManyToMany(mappedBy = "coaches")
-	private List<WorkoutProgram> workoutPrograms = new ArrayList<>();
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "coach")
+	private List<WorkoutProgram> workoutPrograms = new ArrayList<WorkoutProgram>();
 	
 	public Coach() {}
 	
@@ -80,30 +81,52 @@ public class Coach {
 	}
 
 	public void addUser(User user) {
-		if (!users.contains(user)) {
-			users.add(user);
+		addUser(user, true);
+	}
+	void addUser(User user, boolean set) {
+		if (user != null) {
+			if(getUsers().contains(user)) {
+				getUsers().set(getUsers().indexOf(user), user);
+			} else {
+				getUsers().add(user);
+			} if (set) {
+				user.setCoach(this, false);
+			}
 		}
 	}
+	
+	public void removeUser(User user) {
+		getUsers().remove(user);
+		user.setCoach(null);
+	}
+	
 	public void addWorkoutProgram(WorkoutProgram wProgram) {
-		if (!workoutPrograms.contains(wProgram)) {
-			workoutPrograms.add(wProgram);
-		}
+		addWorkoutProgram(wProgram, true);
 	}
 	
-	public boolean removeUser(User user) {
-		return users.remove(user);
-	} 
-	
-	public boolean removeWorkoutProgram(WorkoutProgram wProgram) {
-		return workoutPrograms.remove(wProgram);
+	void addWorkoutProgram(WorkoutProgram wProgram, boolean set) {
+		if (wProgram != null) {
+			if(getWorkoutPrograms().contains(wProgram)) {
+				getWorkoutPrograms().set(getWorkoutPrograms().indexOf(wProgram), wProgram);
+			} else {
+				getWorkoutPrograms().add(wProgram);
+			} if (set) {
+				wProgram.setCoach(this, false);
+			}
+		}
 	}
 
-	public long getId() {
+	public void removeWorkoutProgram(WorkoutProgram wProgram) {
+		getWorkoutPrograms().remove(wProgram);
+		wProgram.setCoach(null);
+	}
+
+	public Long getId() {
 		return id;
 	}
 
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -276,5 +299,19 @@ public class Coach {
 				+ ", username=" + username + ", password=" + password + ", confirmPassword=" + confirmPassword
 				+ ", group=" + group + ", users=" + users + ", workoutPrograms=" + workoutPrograms + "]";
 	}
-
+	
+	public boolean equals(Object object) {
+        if (object == this)
+            return true;
+        if ((object == null) || !(object instanceof Coach))
+            return false;
+ 
+        final Coach coach = (Coach)object;
+ 
+        if (id != null && coach.getId() != null) {
+            return id.equals(coach.getId());
+        }
+        return false;
+    }
+	
 }
