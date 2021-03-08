@@ -19,6 +19,7 @@ public class WorkoutProgramService {
 	@Autowired
 	private WorkoutProgramRepository workoutProgramRepository;
 
+
 	public List<WorkoutProgram> getAllWorkoutPrograms() {
 		List<WorkoutProgram> workoutsList = workoutProgramRepository.findAll();
 		if (workoutsList.size() > 0) {
@@ -27,11 +28,15 @@ public class WorkoutProgramService {
 			return new ArrayList<WorkoutProgram>();
 		}
 	}
-	
+	// TODO get object 
 	public List<WorkoutProgram> getByCoach(Coach coach) {
 		return workoutProgramRepository.findByCoach(coach);
 	}
-
+	
+	public List<WorkoutProgram> getByCoachNative(Long id) {
+		 return workoutProgramRepository.findByCoachesIdNative(id);
+		 
+	}
 	
 	public WorkoutProgram updateWorkoutProgram(WorkoutProgram wp, User user, TrainingDay tDay) {
 		Optional<WorkoutProgram> workouts = workoutProgramRepository.findById(wp.getId());
@@ -53,6 +58,16 @@ public class WorkoutProgramService {
 		
 	}
 	
+	public WorkoutProgram getWorkoutProgramById(Long id) {
+		Optional<WorkoutProgram> wp = workoutProgramRepository.findById(id);
+		
+		if(wp.isPresent()) {
+			return wp.get();
+		} else {
+			return null;
+		}
+	}
+	
 	public WorkoutProgram saveWorkoutProgram(WorkoutProgram wp) {
 		wp = workoutProgramRepository.save(wp);
 		return wp;
@@ -61,6 +76,10 @@ public class WorkoutProgramService {
 	public WorkoutProgram deleteWorkoutProgram(WorkoutProgram wp) {
 		workoutProgramRepository.delete(wp);
 		return wp;
+	}
+	
+	public void deleteWorkoutProgramById(Long id) {
+		workoutProgramRepository.deleteById(id);
 	}
 	
 }

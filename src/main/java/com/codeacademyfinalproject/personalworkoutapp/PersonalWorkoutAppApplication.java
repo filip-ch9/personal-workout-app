@@ -83,8 +83,8 @@ public class PersonalWorkoutAppApplication {
 			user.setCountry("Macedonia" + i);
 			user.setGender("Male");
 			user.setUsername("pero1" + i);
-			user.setPassword("pero");
-			user.setConfirmPassword("pero");
+			user.setPassword("pero" + i);
+			user.setConfirmPassword("pero" + i);
 			user.setCoach(coach);
 			coach.addUser(user);
 			userRepository.save(user);

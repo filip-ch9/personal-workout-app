@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Create</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+<div class="container">
+    		<h3>Create Workout Program</h3>
+    			<form action="#" th:action="@{/createWorkoutProgram}" th:object="${workoutProgram}" method="post">
+  				<div class="row">
+						<div class="col-xs-2">
+							<label for="nameOfWorkoutProgram">Name</label>
+							<input type="text" th:field="*{nameOfWorkoutProgram}" 
+								id="nameOfWorkoutProgram" name="nameOfWorkoutProgram" class="form-control" placeholder="Name of program">
+						
+						</div>
+						<div class="col-xs-2">
+							<label for="startDate">Start Date</label>
+							<input type="date" 
+								id="startDate" name="startDate" class="form-control" placeholder="dd/mm/yyyy">
+						</div>
+						<div class="col-xs-2">
+							<label for="endDate">End Date</label>
+							<input type="date" 
+								id="endDate" name="endDate" class="form-control" placeholder="dd/mm/yyyy">
+						</div>
+						<div class="col-xs-3">
+							<label for="user.email">User</label>
+							<input type="email" 
+								id="user.email" name="user.email" class="form-control" placeholder="user@email">
+						</div>
+						<div class="col-xs-2">
+							<label for="workouts">Training Days</label>
+							<input type="number" 
+								id="workouts" name="workouts" class="form-control" placeholder="Number">
+						</div>
+						
+						</div>
+						<div class="row">
+						 <div class="col-xs-2">
+                                <input type="submit" class="btn btn-primary" value=" Submit ">
+                            </div>
+ 
+                            <input type="hidden" id="id" th:field="*{id}">
+						</div>
+   			</form>
+ 	
+    	</div>
+    	</body>
+    	</html>

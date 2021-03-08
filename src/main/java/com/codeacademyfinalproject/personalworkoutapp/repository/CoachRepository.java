@@ -12,12 +12,9 @@ public interface CoachRepository extends JpaRepository<Coach, Long> {
 	public List<Coach> findByEmailAndPassword(String email, String password);
 
 	public List<Coach> findByEmail(String email);
+
 	
-	/**
-	 * working with native queries
-	 */
-	// TODO change query method
-//	@Query(value = "SELECT * FROM  personal_workout_schema.coaches P INNER JOIN  personal_workout_schema.application_user  C  ON  C.coach_id = P.id", nativeQuery = true)
-//	public List<Coach> findByUsersIdNative(@Param("id") Long id1, @Param("id") Long id2);
+	
+
 	
 }

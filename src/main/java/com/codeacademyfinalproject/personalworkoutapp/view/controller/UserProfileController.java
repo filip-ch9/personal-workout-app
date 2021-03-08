@@ -10,15 +10,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.codeacademyfinalproject.personalworkoutapp.model.User;
 import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutProgram;
-import com.codeacademyfinalproject.personalworkoutapp.service.UserService;
 import com.codeacademyfinalproject.personalworkoutapp.service.WorkoutProgramService;
 
 @Controller
 @SessionAttributes(names = {"user", "workouts"})
 public class UserProfileController {
 	
-	@Autowired
-	private UserService userService;
+
 	@Autowired
 	private WorkoutProgramService workoutProgramService;
 	

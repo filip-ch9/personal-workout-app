@@ -21,7 +21,7 @@ import org.hibernate.annotations.NaturalId;
 public class Coach {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Version
 	private Long version;

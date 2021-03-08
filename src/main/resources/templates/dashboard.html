@@ -31,10 +31,9 @@
     </nav>
     
     <div class="container-fluid">
-	<div class="panel panel-default">
 	<div th:switch="${users}" class="container my-5">
             <div th:switch="${workoutPrograms}" class="container my-5">
-            <div class="col-md-10">
+            <div class="col-xl-10">
                 <h2 th:case="null">No record found !!</h2>
                 <div th:case="*">
 			  <!-- Default panel contents -->
@@ -48,7 +47,8 @@
 				      <th scope="col">Program Name</th>
 				      <th scope="col">Start Date</th>
 				      <th scope="col">End Date</th>
-				      <th scope="col">Add/Remove</th>
+				      <th scope="col">Group</th>
+				      <th scope="col">Update/Delete</th>
 				      <th><!-- Single button -->
 							<div class="btn-group">
 							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,17 +71,17 @@
 							<td th:text="${user.email}"></td>
 							<td th:text="${user.workoutProgram}"></td>
 							<td th:text="${user.workoutProgram}"></td>
+							<td th:text="${user.group}"></td>
 							<td th:text="${user.workoutProgram}"></td>
 							<td><a type="button" class="btn btn-success"
 								th:href="@{/update/{id}(id=${user.id})}">Update</a>
-							<a type="button" class="btn btn-warning"
-								href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
+							<a type="button" class="btn btn-danger"
+								href="@{/delete-users/{id}(id=${user.id})}">Delete</a></td>
 
 							</tr>
 				</tbody>
 			</table>
 		</div>
-	</div>
 	</div>
 	</div>
 	</div>

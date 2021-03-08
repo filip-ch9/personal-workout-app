@@ -29,7 +29,7 @@ public class CoachService {
 		if(coach.isPresent()) {
 			return coach.get();
 		} else {
-			return coach.get();
+			return null;
 		}
 		
 	}
@@ -50,6 +50,8 @@ public class CoachService {
 			newCoach.setEmail(coach.getEmail());
 			newCoach.setName(coach.getName());
 			newCoach.setSurname(coach.getSurname());
+			newCoach.setPassword(coach.getPassword());
+			newCoach.setConfirmPassword(coach.getConfirmPassword());
 
 			newCoach = coachRepository.save(newCoach);
 			return newCoach;

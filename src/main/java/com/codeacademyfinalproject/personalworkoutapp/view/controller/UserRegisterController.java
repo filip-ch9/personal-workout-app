@@ -15,7 +15,7 @@ import com.codeacademyfinalproject.personalworkoutapp.model.User;
 import com.codeacademyfinalproject.personalworkoutapp.service.UserService;
 
 @Controller
-@SessionAttributes(names = { "username", "user" })
+@SessionAttributes(names = { "username", "user", "email" })
 public class UserRegisterController {
 
 	@Autowired
@@ -33,6 +33,7 @@ public class UserRegisterController {
 			user = userService.saveUser(user);
 			model.addAttribute("username", user.getUsername());
 			model.addAttribute("user", user);
+			model.addAttribute("email", email);
 			return "redirect:/user-profile";
 		} else {
 			model.put("errorMessage", "Email is already in use");

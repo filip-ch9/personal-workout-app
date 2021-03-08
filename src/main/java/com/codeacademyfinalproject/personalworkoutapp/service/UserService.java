@@ -17,6 +17,10 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	public List<User> getByCoachNative(Long id) {
+		return userRepository.findByCoachIdNative(id);
+	}
+	
 	public List<User> getUsersByWorkoutProgram(WorkoutProgram wp) {
 		return userRepository.findByWorkoutProgram(wp);
 	}
@@ -35,7 +39,7 @@ public class UserService {
 		if(user.isPresent()) {
 			return user.get();
 		} else {
-			return user.get();
+			return null;
 		}
 		
 	}
@@ -71,6 +75,7 @@ public class UserService {
 			newUser.setEmail(user.getEmail());
 			newUser.setName(user.getName());
 			newUser.setSurname(user.getSurname());
+			newUser.setWorkoutProgram(user.getWorkoutProgram());
 			
 			newUser = userRepository.save(newUser);
 			return newUser;

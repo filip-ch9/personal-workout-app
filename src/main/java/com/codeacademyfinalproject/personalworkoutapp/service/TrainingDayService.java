@@ -25,8 +25,40 @@ public class TrainingDayService {
 		return trainingDayRepository.findAll();
 	}
 	
-	public Optional<TrainingDay> getTrainingDayById(Long id) {
-		return trainingDayRepository.findById(id);
+	public TrainingDay getTrainingDayById(Long id) {
+		Optional<TrainingDay> training = trainingDayRepository.findById(id);
+		
+		if (training.isPresent()) {
+			return training.get();
+		} else {
+			return null;
+		}
+	}
+	
+	public TrainingDay updateTrainingDay(TrainingDay training) {
+		Optional<TrainingDay> trainingDays = trainingDayRepository.findById(training.getId());
+		
+		if(trainingDays.isPresent()) {
+			TrainingDay newTraining = trainingDays.get();
+			newTraining.setNameOfExercise(training.getNameOfExercise());
+			newTraining.setDuration(training.getDuration());
+			newTraining.setDayOfTraining(training.getDayOfTraining());
+			newTraining.setSets(training.getSets());
+			newTraining.setReps(training.getReps());
+			newTraining.setPause(training.getPause());
+			newTraining.setImage(training.getImage());
+			newTraining.setType(training.getType());
+			
+			newTraining = trainingDayRepository.save(newTraining);
+			return newTraining;
+		} else {
+			training = trainingDayRepository.save(training);
+			return training;
+		}
+	}
+	
+	public void deleteTrainingDayById(Long id) {
+		trainingDayRepository.deleteById(id);
 	}
 
 }

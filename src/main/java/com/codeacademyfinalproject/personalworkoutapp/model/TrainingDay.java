@@ -17,7 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TRAINING_DAYS")
@@ -39,9 +38,8 @@ public class TrainingDay {
 	private int reps;
 	private int pause;
 	
-	@NotNull(message = "Type of workout is required.")
 	@Enumerated(EnumType.STRING)
-	@Column(name = "workout_type", nullable = false)
+//	@Column(name = "workout_type", nullable = false)
 	private WorkoutType type;
 	
 	@ManyToOne
@@ -55,8 +53,7 @@ public class TrainingDay {
 	public TrainingDay() {}
 
 	public TrainingDay(Long version, String nameOfExercise, int duration, Date dayOfTraining, int sets, int reps,
-			int pause, @NotNull(message = "Type of workout is required.") WorkoutType type,
-			WorkoutProgram workoutProgram, byte[] image) {
+			int pause, WorkoutType type, WorkoutProgram workoutProgram, byte[] image) {
 		super();
 		this.version = version;
 		this.nameOfExercise = nameOfExercise;
@@ -168,11 +165,12 @@ public class TrainingDay {
 		this.nameOfExercise = nameOfExercise;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "TrainingDay [id=" + id + ", version=" + version + ", nameOfExercise=" + nameOfExercise + ", duration="
-				+ duration + ", dayOfTraining=" + dayOfTraining + ", sets=" + sets + ", reps=" + reps + ", pause="
-				+ pause + ", type=" + type + ", workoutProgram=" + workoutProgram + ", image=" + Arrays.toString(image) + "]";
+		return "TrainingDay [nameOfExercise=" + nameOfExercise + ", duration=" + duration + ", dayOfTraining="
+				+ dayOfTraining + ", sets=" + sets + ", reps=" + reps + ", pause=" + pause + ", type=" + type
+				+ ", image=" + Arrays.toString(image) + "]";
 	}
 
 	public boolean equals(Object object) {

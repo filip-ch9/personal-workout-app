@@ -15,7 +15,7 @@ import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
 import com.codeacademyfinalproject.personalworkoutapp.service.CoachService;
 
 @Controller
-@SessionAttributes(names = {"coach", "username"})
+@SessionAttributes(names = {"coach", "username", "email", "biography"})
 public class CoachRegisterController {
 
 	@Autowired
@@ -27,12 +27,14 @@ public class CoachRegisterController {
 	}
 
 	@PostMapping("/coach-register")
-	public String registerCoach(@RequestBody String body, @RequestParam String email, Coach coach, ModelMap model) {
+	public String registerCoach(@RequestBody String body, @RequestParam String email, String biography, Coach coach, ModelMap model) {
 		List<Coach> isValidEmail = coachService.getCoach(email);
 		if (isValidEmail.isEmpty()) {
 			coach = coachService.saveCoach(coach);
 			model.addAttribute("username", coach.getUsername());
 			model.addAttribute("coach", coach);
+			model.addAttribute("email", email);
+			model.addAttribute("biography", biography);
 			return "redirect:/coach-profile";
 		} else {
 			model.put("errorMessage", "Email is already in use");
