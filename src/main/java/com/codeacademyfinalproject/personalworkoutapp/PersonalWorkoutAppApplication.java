@@ -38,7 +38,6 @@ public class PersonalWorkoutAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PersonalWorkoutAppApplication.class, args);
-
 	}
 
 	@PostConstruct
@@ -54,6 +53,7 @@ public class PersonalWorkoutAppApplication {
 		a.setConfirmPassword("admin");
 		a.setGender("male");
 		adminRepository.save(a);
+		
 	}
 
 	@PostConstruct

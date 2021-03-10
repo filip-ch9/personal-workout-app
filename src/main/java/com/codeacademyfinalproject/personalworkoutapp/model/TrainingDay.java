@@ -11,12 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "TRAINING_DAYS")
@@ -46,7 +47,7 @@ public class TrainingDay {
 	@JoinColumn(name = "workoutProgram", referencedColumnName = "id")
 	private WorkoutProgram workoutProgram;
 	
-	@Lob
+	@Type(type="org.hibernate.type.BinaryType")
 	@Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
 	private byte[] image;
 	

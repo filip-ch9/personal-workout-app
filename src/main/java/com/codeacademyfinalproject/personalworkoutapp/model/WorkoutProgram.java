@@ -24,7 +24,7 @@ import javax.persistence.Version;
 public class WorkoutProgram {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Version

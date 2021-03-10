@@ -116,35 +116,17 @@
                                 <td th:text="${trainingDay.reps}"></td>
                                 <td th:text="${trainingDay.pause}"></td>
                                 <td th:text="${trainingDay.type}"></td>
-                                <td th:text="${trainingDay.image}"></td>
-                                <td>  <!-- Button trigger modal -->
-								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-							  		Add Image
-								</button>
+                                <td><img src="/personal-workout-app/myImage/ImageDisplay?id=${trainingDay.trainingDayId"/></td>
+                                <td>  
+                                <input type="file" id="files">
 
-							<div id='div_img_name'> </div>
 
-							<!-- Modal -->
-							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-							  <div class="modal-dialog" role="document">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							        <h4 class="modal-title" id="myModalLabel">Choose Image</h4>
-							      </div>
-							      <div class="modal-body">
-							
-							            <!-- images added for example purpose-->
-												<img src="/gif/0.gif" />
-										        <img src="/gif/1.gif" />
-										        <img src="/gif/11.gif" />
-										        <img src="/gif/2.gif" />
-										        <img src="/gif/21.gif" />
-										        <img src="/gif/22.gif" />
-							      </div>
-							    </div>
-							  </div>
-							</div></td> 
+									<p id="state">No images selected</p>
+									<div id="list">
+									</div>
+									
+									<a href="#" id="deleteImgs">Delete Images</a>
+							</td> 
                                 
                             </tr>
                         </tbody>
@@ -161,9 +143,78 @@
     	
     </body>
 	<script type="text/javascript">
-	$(".img").click(function(){
-	    $("#div_img_name").text($(this).attr('src'));
-	    $('#myModal').modal('hide');
-	});
+	var imagesObject = [];
+
+	function handleFileSelect(evt) {
+	    var files = evt.target.files; // FileList object
+
+	    // Loop through the FileList and render image files as thumbnails.
+	    for (var i = 0, f; f = files[i]; i++) {
+
+	      // Only process image files.
+	      if (!f.type.match('image.*')) {
+	        continue;
+	      }
+
+	      var reader = new FileReader();
+
+	      // Closure to capture the file information.
+	      reader.onload = function(e) {
+	          displayImgData(e.target.result)
+	          addImage(e.target.result);
+	      };
+
+	      reader.readAsDataURL(f);
+	    }
+	}
+
+	function loadFromLocalStorage(){
+	  var images = JSON.parse(localStorage.getItem("images"))
+
+	  if(images && images.length > 0){
+	    imagesObject = images;
+	    
+	    displayNumberOfImgs();
+	    images.forEach(displayImgData);
+	  }
+	}
+
+	function addImage(imgData){
+	  imagesObject.push(imgData);
+	  displayNumberOfImgs();
+	  localStorage.setItem("images", JSON.stringify(imagesObject));
+	}
+
+	function displayImgData(imgData){
+	  var span = document.createElement('span');
+	  span.innerHTML = '<img class="thumb" src="' + imgData + '"/>';
+	  document.getElementById('list').insertBefore(span, null);
+	}
+
+	function displayNumberOfImgs(){
+	  if(imagesObject.length > 0){
+
+	    document.getElementById("state").innerHTML = imagesObject.length + " image" + ((imagesObject.length > 1) ? "s" : "") + " stored in your browser";
+	    
+	    document.getElementById("deleteImgs").style.display = "inline";
+	    
+	  } else {
+	    document.getElementById("state").innerHTML = "No images selected";
+	    document.getElementById("deleteImgs").style.display = "none";
+	  }
+	  
+	  
+	}
+
+	function deleteImages(){
+	  imagesObject = [];
+	  localStorage.removeItem("images");
+	  displayNumberOfImgs()
+	  document.getElementById('list').innerHTML = "";
+	}
+
+	document.getElementById('files').addEventListener('change', handleFileSelect, false);
+	document.getElementById('deleteImgs').addEventListener("click", deleteImages);
+	loadFromLocalStorage();
 	</script>
  </html>

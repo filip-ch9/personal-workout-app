@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Sans);
+
+body {
+  font-family: PT Sans;
+}
+
+#list img {
+  max-width: 300px;
+}
+
+#deleteImgs {
+  display: none;
+  text-decoration: none;
+}
