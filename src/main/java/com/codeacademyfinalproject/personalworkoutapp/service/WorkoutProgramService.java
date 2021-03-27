@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
-import com.codeacademyfinalproject.personalworkoutapp.model.TrainingDay;
-import com.codeacademyfinalproject.personalworkoutapp.model.User;
 import com.codeacademyfinalproject.personalworkoutapp.model.WorkoutProgram;
 import com.codeacademyfinalproject.personalworkoutapp.repository.WorkoutProgramRepository;
 
@@ -34,19 +32,19 @@ public class WorkoutProgramService {
 	}
 	
 	public List<WorkoutProgram> getByCoachNative(Long id) {
-		 return workoutProgramRepository.findByCoachesIdNative(id);
+		 return workoutProgramRepository.findByCoachIdNative2(id);
 		 
 	}
 	
-	public WorkoutProgram updateWorkoutProgram(WorkoutProgram wp, User user, TrainingDay tDay) {
+	public WorkoutProgram updateWorkoutProgram(WorkoutProgram wp) {
 		Optional<WorkoutProgram> workouts = workoutProgramRepository.findById(wp.getId());
 		
 		if (workouts.isPresent()) {
 			WorkoutProgram newWorkoutProgram = workouts.get();
 			newWorkoutProgram.setStartDate(wp.getStartDate());
 			newWorkoutProgram.setEndDate(wp.getEndDate());
-			newWorkoutProgram.addUser(user);
-			newWorkoutProgram.addTrainingDay(tDay);
+			newWorkoutProgram.setUsers(wp.getUsers());
+			newWorkoutProgram.setWorkouts(wp.getWorkouts());
 			newWorkoutProgram.setGroup(wp.getGroup());
 			
 			newWorkoutProgram = workoutProgramRepository.save(newWorkoutProgram);

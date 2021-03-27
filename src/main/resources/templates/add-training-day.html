@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Create</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+<h3>Training Day</h3>
+ 				<form action="#" th:action="@{/createTrainingDay}" th:object="${trainingDay}" enctype="multipart/form-data" 
+ 				method="post">
+  					<div class="row">
+  					<div class="col-md-1">
+							<label for="id">Id</label>
+							<input type="number" th:field="*{id}" 
+								id="id" name="id" class="form-control" placeholder="Id">
+						
+						</div>
+						<div class="col-md-2">
+							<label for="nameOfExercise">Name</label>
+							<input type="text" th:field="*{nameOfExercise}" 
+								id="nameOfExercise" name="nameOfExercise" class="form-control" placeholder="Name of exercise">
+						
+						</div>
+						<div class="col-md-1">
+							<label for="duration">Duration</label>
+							<input type="number" th:field="*{nameOfExercise}" 
+								id="duration" name="duration" class="form-control" placeholder="Duration">
+						
+						</div>
+						<div class="col-md-3">
+							<label for="dayOfTraining">Day of training</label>
+							<input type="date" th:field="*{dayOfTraining}" 
+								id="dayOfTraining" name="dayOfTraining" class="form-control" placeholder="Day of training">
+						
+						</div>
+						<div class="col-md-1">
+							<label for="sets">Sets</label>
+							<input type="number" th:field="*{sets}" 
+								id="sets" name="sets" class="form-control" placeholder="Sets">
+						
+						</div>
+						<div class="col-md-1">
+							<label for="reps">Repetitions</label>
+							<input type="number" th:field="*{reps}" 
+								id="reps" name="reps" class="form-control" placeholder="Repetitions">
+						
+						</div>
+						<div class="col-md-1">
+							<label for="pause">Pause</label>
+							<input type="number" th:field="*{pause}" 
+								id="pause" name="pause" class="form-control" placeholder="Pause">
+						
+						</div>
+						<div class="col-md-3">
+							<label for="type">Type</label>
+							<input type="text" th:field="*{type}" 
+								id="type" name="type" class="form-control" placeholder="Type">
+						
+						</div>
+						<div class="col-md-3">
+							<label for="image">Image</label>
+							<input type="file" th:field="*{image}" 
+								id="image" name="image" class="form-control" placeholder="Upload Image">
+						
+						</div>
+						</div><br>
+						<div class="row">
+						 <div class="col-md-2">
+                                <input type="submit" class="btn btn-primary" value=" Submit ">
+                            </div>
+ 
+                            <input type="hidden" id="id" th:field="*{id}">
+						</div><br>
+						<div class="col-md-2 tn-buttons">
+		<button type="button" class="mb-xs mr-xs btn btn-info addmore">Add</button>
+		<button type="button" class="mb-xs mr-xs btn btn-danger removemore">Remove</button>
+	</div>
+						</form><br>
+				<div id="packagingappendhere">
+</div>	
+</div>
+</body>
+<script type="text/javascript">
+ 			$(document).on('click', '.addmore', function (ev) {
+ 				var $clone = $(this).parent().parent().clone(true);
+ 				var $newbuttons = "<button type='button' class='mb-xs mr-xs btn btn-info addmore'>Add</button><button type='button' class='mb-xs mr-xs btn btn-danger removemore'>Remove</button>";
+ 				$clone.find('.tn-buttons').html($newbuttons).end().appendTo($('#packagingappendhere'));
+ 			});
+
+ 			$(document).on('click', '.removemore', function () {
+ 				$(this).parent().parent().remove();
+ 			});
+ 			
+ 			
+ 			</script>
+</html>

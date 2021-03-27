@@ -24,7 +24,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="/user-training"><span
 						class="glyphicon glyphicon-bullhorn"></span> Training</a></li>
-				<li><a href="/user-nutrition"><span
+				<li><a href="/coming-soon"><span
 						class="glyphicon glyphicon-leaf"></span> Nutrition</a></li>
 				<li><a href="/user-analytics"><span
 						class="glyphicon glyphicon-stats"></span> Analytics</a></li>
@@ -39,7 +39,12 @@
 			</ul>
 		</div>
 	</nav>
-
+	<div class="container">
+			<h1><time>00:00:00</time></h1>
+			<button class="btn btn-success" id="start">start</button>
+			<button class="btn btn-danger" id="stop">stop</button>
+			<button class="btn btn-warning" id="clear">clear</button>
+		</div>
 	<div class="contatiner">
 		<div class="card">
 			<div class="card-body">
@@ -69,7 +74,7 @@
 										<td th:text="${trainingDay.reps}"></td>
 										<td th:text="${trainingDay.pause}"></td>
 										<td th:text="${trainingDay.type}"></td>
-										<td th:text="${trainingDay.image}"></td>
+										<td><img src="/gif/1.gif" width="60px" height="60px"/></td>
 									</tr>
 								</tbody>
 							</table>
@@ -77,12 +82,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="container">
-			<h1><time>00:00:00</time></h1>
-			<button class="btn btn-success" id="start">start</button>
-			<button class="btn btn-danger" id="stop">stop</button>
-			<button class="btn btn-warning" id="clear">clear</button>
-		</div>
+			
 		</div>
 	</div>
 

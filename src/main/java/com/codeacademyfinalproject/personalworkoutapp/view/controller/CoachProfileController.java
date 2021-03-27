@@ -33,7 +33,6 @@ public class CoachProfileController {
 	private CoachService coachService;
 	@Autowired
 	private TrainingDayService trainingDayService;
- 	
 
 	@GetMapping("/coach-profile")
 	public String showProfilePage(Model model) {
@@ -60,25 +59,33 @@ public class CoachProfileController {
 	public String showTrainingPage(Model model) {
 		List<WorkoutProgram> workoutPrograms = workoutProgramService.getAllWorkoutPrograms();
 		List<TrainingDay> trainingDays = trainingDayService.getAllTrainingDays();
- 		model.addAttribute("workoutProgram", workoutPrograms);
- 		model.addAttribute("trainingDay", trainingDays);
+		model.addAttribute("workoutProgram", workoutPrograms);
+		model.addAttribute("trainingDay", trainingDays);
 		return "training";
 	}
-	
-	@RequestMapping(path = {"/edit-program", "/edit-program/{id}"})
+
+	@RequestMapping(path = { "/edit-program", "/edit-program/{id}" })
 	public String editWorkoutProgram(Model model, @PathVariable("id") Optional<Long> id) {
 		if (id.isPresent()) {
 			WorkoutProgram wp = workoutProgramService.getWorkoutProgramById(id.get());
-			TrainingDay training = trainingDayService.getTrainingDayById(id.get());
 			model.addAttribute("workoutProgram", wp);
-			model.addAttribute("trainingDay", training);
-		} else { 
+		} else {
 			model.addAttribute("workoutProgram", new WorkoutProgram());
-			model.addAttribute("trainingDay", new TrainingDay());
 		}
 		return "create-edit-workout-program";
 	}
-	
+
+	@RequestMapping(path = { "/edit-training", "/edit-training/{id}" })
+	public String editTraining(Model model, @PathVariable("id") Optional<Long> id) {
+		if (id.isPresent()) {
+			TrainingDay training = trainingDayService.getTrainingDayById(id.get());
+			model.addAttribute("trainingDay", training);
+		} else {
+			model.addAttribute("trainingDay", new TrainingDay());
+		}
+		return "add-training-day";
+	}
+
 	// TODO step1: save workoutProgram to database using its service
 	// step2: get all Users from database which are specified for the given
 	// program(array of strings)
@@ -86,10 +93,16 @@ public class CoachProfileController {
 	// returned from saved workoutProgram
 	// step4: update all users using the appropriate service
 	@PostMapping("/createWorkoutProgram")
-	public String createOrUpdateWorkoutProgram(WorkoutProgram workoutProgram, User user, TrainingDay trainingDay) {
-		workoutProgramService.updateWorkoutProgram(workoutProgram, user, trainingDay);
-		trainingDayService.updateTrainingDay(trainingDay);
-		
+	public String createWorkoutProgram(Model model, WorkoutProgram workoutProgram) {
+
+		workoutProgramService.updateWorkoutProgram(workoutProgram);
+
+		return "redirect:/training";
+	}
+
+	@PostMapping("/createTrainingDay")
+	public String createTrainingDay(Model model, TrainingDay training) {
+		trainingDayService.updateTrainingDay(training);
 		return "redirect:/training";
 	}
 
@@ -98,10 +111,16 @@ public class CoachProfileController {
 		userService.deleteUserById(id);
 		return "redirect:/dashboard";
 	}
-	
+
 	@RequestMapping(path = { "/delete-program", "/delete-program/{id}" })
 	public String deleteWorkoutProgramById(@PathVariable("id") Long id) {
 		workoutProgramService.deleteWorkoutProgramById(id);
+		return "redirect:/training";
+	}
+	
+	@RequestMapping(path = { "/delete-training", "/delete-training/{id}" })
+	public String deleteTrainingById(@PathVariable("id") Long id) {
+		trainingDayService.deleteTrainingDayById(id);
 		return "redirect:/training";
 	}
 

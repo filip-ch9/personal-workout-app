@@ -24,5 +24,9 @@ public interface WorkoutProgramRepository extends JpaRepository<WorkoutProgram, 
 			+ "JOIN personal_workout_schema.coaches\r\n"
 			+ "ON personal_workout_schema.workout_program.coach_id = personal_workout_schema.coaches.id", nativeQuery = true)
 	public List<WorkoutProgram> findByCoachesIdNative(@Param("id") Long id);
-
+	
+	@Query(value = "SELECT * FROM personal_workout_schema.workout_program\r\n"
+			+ "WHERE personal_workout_schema.workout_program.coach_id = id", nativeQuery = true) 
+	public List<WorkoutProgram> findByCoachIdNative2(@Param("id") Long id);
+	
 }

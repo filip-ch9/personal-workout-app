@@ -1,7 +1,6 @@
 package com.codeacademyfinalproject.personalworkoutapp.view.controller;
 
 import java.io.IOException;
-
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

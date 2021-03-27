@@ -38,6 +38,8 @@ public class PersonalWorkoutAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PersonalWorkoutAppApplication.class, args);
+		
+		
 	}
 
 	@PostConstruct
@@ -73,6 +75,12 @@ public class PersonalWorkoutAppApplication {
 		coach.setConfirmPassword("a");
 		coach.setUsername("Filip10");
 		coachRepository.save(coach);
+		WorkoutProgram workoutProgram = new WorkoutProgram();
+		workoutProgram.setStartDate(new Date());
+		workoutProgram.setEndDate(new Date());
+		workoutProgram.setNameOfWorkoutProgram("My Program");
+		workoutProgram.setGroup(Group.SPORTS_TEAMS);
+		workoutProgramRepository.save(workoutProgram);
 		List<User> users = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			User user = new User();
@@ -87,19 +95,15 @@ public class PersonalWorkoutAppApplication {
 			user.setConfirmPassword("pero" + i);
 			user.setCoach(coach);
 			coach.addUser(user);
+			workoutProgram.addUser(user);
 			userRepository.save(user);
 		}
 		coach.setUsers(users);
 		coachRepository.save(coach);
 
-		WorkoutProgram workoutProgram = new WorkoutProgram();
-		workoutProgram.setStartDate(new Date());
-		workoutProgram.setEndDate(new Date());
-		workoutProgram.setNameOfWorkoutProgram("My Program");
-		workoutProgram.setGroup(Group.SPORTS_TEAMS);
-		workoutProgramRepository.save(workoutProgram);
+		
 		List<TrainingDay> trainings = new ArrayList<>();
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 9; i++) {
 			TrainingDay training = new TrainingDay();
 			training.setDayOfTraining(new Date());
 			training.setDuration(50 + i);

@@ -65,14 +65,14 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-						<tr th:each="user : ${users}">
+						<tr th:each="user : ${users}" >
 							<td th:text="${user.name}"></td>
 							<td th:text="${user.surname}"></td>
 							<td th:text="${user.email}"></td>
-							<td th:text="${user.workoutProgram}"></td>
-							<td th:text="${user.workoutProgram}"></td>
-							<td th:text="${user.group}"></td>
-							<td th:text="${user.workoutProgram}"></td>
+							<td data-th-text="${user.workoutProgram.nameOfWorkoutProgram}"></td>
+							<td data-th-text="${user.workoutProgram.startDate}"></td>
+							<td data-th-text="${user.workoutProgram.endDate}"></td>
+							<td data-th-text="${user.workoutProgram.group}"></td>
 							<td><a type="button" class="btn btn-success"
 								th:href="@{/update/{id}(id=${user.id})}">Update</a>
 							<a type="button" class="btn btn-danger"
