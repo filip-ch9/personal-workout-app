@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.codeacademyfinalproject.personalworkoutapp.model.Coach;
 import com.codeacademyfinalproject.personalworkoutapp.model.User;
@@ -17,6 +18,8 @@ import com.codeacademyfinalproject.personalworkoutapp.service.CoachService;
 import com.codeacademyfinalproject.personalworkoutapp.service.UserService;
 
 @Controller
+@RestController
+@RequestMapping(value = "/admin")
 public class AdminController {
 	
 	@Autowired
@@ -24,7 +27,7 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/admin")
+	@GetMapping
 	public String showAdminPage(Model model) {
 		List<Coach> coachesList = coachService.getAllCoaches();
 		List<User> userList = userService.getAllUsers();
